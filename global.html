@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Global Network | Comcof Group</title>
+<meta name="description" content="Comcof Group works from Kampala today and is building toward a planned network of trade hubs and target markets across the geography of global coffee.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230C0B0A'/%3E%3Cellipse cx='32' cy='32' rx='27' ry='19' fill='none' stroke='%23B8933E' stroke-width='4'/%3E%3Ccircle cx='32' cy='32' r='8' fill='%23B8933E'/%3E%3Cpath d='M28 26c6 2-2 6 6 10' stroke='%230C0B0A' stroke-width='2.4' fill='none' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600&family=DM+Sans:ital,opsz,wght@0,9..40,200;0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=Poppins:wght@800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+
+<nav id="nav">
+  <a href="/" class="nav-logo" aria-label="Comcof Group home">
+    <svg class="logo-svg" viewBox="0 0 400 150" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Comcof">
+      <ellipse cx="200" cy="75" rx="186" ry="62" stroke="currentColor" stroke-width="11"/>
+      <text x="52" y="96" font-family="Poppins, DM Sans, sans-serif" font-weight="800" font-size="58" fill="currentColor" textLength="190" lengthAdjust="spacingAndGlyphs">COMC</text>
+      <circle cx="276" cy="75" r="23" fill="currentColor"/>
+      <path d="M266 60 C 284 69, 268 81, 286 90" stroke="#0C0B0A" stroke-width="6" fill="none" stroke-linecap="round"/>
+      <text x="312" y="96" font-family="Poppins, DM Sans, sans-serif" font-weight="800" font-size="58" fill="currentColor" textLength="34" lengthAdjust="spacingAndGlyphs">F</text>
+    </svg>
+    <span class="nav-logo-sub">The Commerce of Coffee</span>
+  </a>
+  <div class="nav-links">
+    <a href="/about">About</a>
+    <a href="/group">The Group</a>
+    <a href="/coffee">Our Coffee</a>
+    <a href="/global" class="active">Global</a>
+    <a href="/responsibility">Responsibility</a>
+    <a href="/partners">Partners</a>
+    <a href="/insights">Insights</a>
+  </div>
+  <a href="/contact" class="nav-cta">Contact</a>
+  <button class="nav-mobile-btn" onclick="document.querySelector('.mobile-nav').classList.toggle('open')" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mobile-nav">
+  <button class="mobile-close" onclick="document.querySelector('.mobile-nav').classList.remove('open')">✕</button>
+  <a href="/">Home</a>
+  <a href="/about">About</a>
+  <a href="/group">The Group</a>
+  <a href="/coffee">Our Coffee</a>
+  <a href="/global">Global</a>
+  <a href="/responsibility">Responsibility</a>
+  <a href="/partners">Partners</a>
+  <a href="/insights">Insights</a>
+  <a href="/contact">Contact</a>
+</div>
+
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <div class="section-eyebrow">Planned Global Network</div>
+    <h1 class="section-h2">Designed for<br><em>World Markets</em></h1>
+    <p class="section-lead">Comcof Group is designed to operate across the full geography of global coffee. Today we work from Kampala. The network below shows where we are building toward.</p>
+  </div>
+</div>
+
+<section id="global-footprint">
+  <div class="gf-map-container reveal">
+    <canvas id="worldMap" class="gf-map-canvas" height="440"></canvas>
+  </div>
+  <div class="gf-legend">
+    <div class="gf-legend-item"><div class="gf-legend-dot" style="background:#B8933E"></div>Origin Base</div>
+    <div class="gf-legend-item"><div class="gf-legend-dot" style="background:#3D6B55"></div>Planned Trade Hubs</div>
+    <div class="gf-legend-item"><div class="gf-legend-dot" style="background:#D4AF6A"></div>Target Markets</div>
+  </div>
+
+  <div class="hub-cards reveal">
+    <div class="hub-card"><div class="hub-flag">🇺🇬</div><div class="hub-city">Kampala</div><div class="hub-role">Origin HQ (Today)</div></div>
+    <div class="hub-card"><div class="hub-flag">🇪🇹</div><div class="hub-city">Addis Ababa</div><div class="hub-role">Planned Origin</div></div>
+    <div class="hub-card"><div class="hub-flag">🇰🇪</div><div class="hub-city">Nairobi</div><div class="hub-role">Planned Regional</div></div>
+    <div class="hub-card"><div class="hub-flag">🇦🇪</div><div class="hub-city">Dubai</div><div class="hub-role">Planned Trade Hub</div></div>
+    <div class="hub-card"><div class="hub-flag">🇳🇱</div><div class="hub-city">Amsterdam</div><div class="hub-role">Target Market</div></div>
+    <div class="hub-card"><div class="hub-flag">🇬🇧</div><div class="hub-city">London</div><div class="hub-role">Target Market</div></div>
+    <div class="hub-card"><div class="hub-flag">🇸🇬</div><div class="hub-city">Singapore</div><div class="hub-role">Target Market</div></div>
+    <div class="hub-card"><div class="hub-flag">🇺🇸</div><div class="hub-city">New York</div><div class="hub-role">Target Market</div></div>
+  </div>
+</section>
+
+<div class="band-dark reveal">
+  <h3>Buying from Europe, the Gulf, or Beyond?</h3>
+  <p>Wherever you are, our coffee ships from Kampala with the documentation and quality preparation your market requires.</p>
+  <a href="/partners#enquiry" class="btn-primary">Talk to Our Trade Desk</a>
+</div>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="/" class="nav-logo" aria-label="Comcof Group home">
+        <svg class="logo-svg" style="height:32px" viewBox="0 0 400 150" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Comcof">
+          <ellipse cx="200" cy="75" rx="186" ry="62" stroke="currentColor" stroke-width="11"/>
+          <text x="52" y="96" font-family="Poppins, DM Sans, sans-serif" font-weight="800" font-size="58" fill="currentColor" textLength="190" lengthAdjust="spacingAndGlyphs">COMC</text>
+          <circle cx="276" cy="75" r="23" fill="currentColor"/>
+          <path d="M266 60 C 284 69, 268 81, 286 90" stroke="#0C0B0A" stroke-width="6" fill="none" stroke-linecap="round"/>
+          <text x="312" y="96" font-family="Poppins, DM Sans, sans-serif" font-weight="800" font-size="58" fill="currentColor" textLength="34" lengthAdjust="spacingAndGlyphs">F</text>
+        </svg>
+        <span class="nav-logo-sub">The Commerce of Coffee</span>
+      </a>
+      <p>A coffee enterprise being built from Ugandan origins. Vertically integrated by design, made for the world's markets, and built for the long term.</p>
+    </div>
+    <div class="footer-col">
+      <h5>The Group</h5>
+      <ul>
+        <li><a href="/about">About Comcof</a></li>
+        <li><a href="/group">Business Divisions</a></li>
+        <li><a href="/#value-chain">Value Chain</a></li>
+        <li><a href="/about#roadmap">Growth Roadmap</a></li>
+        <li><a href="/responsibility">Responsibility</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Trade</h5>
+      <ul>
+        <li><a href="/coffee">Green Coffee</a></li>
+        <li><a href="/coffee">Roasted Coffee</a></li>
+        <li><a href="/partners">Private Label</a></li>
+        <li><a href="/partners">Bulk Supply</a></li>
+        <li><a href="/global">Global Network</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Connect</h5>
+      <ul>
+        <li><a href="/insights">Insights</a></li>
+        <li><a href="/partners">Partners</a></li>
+        <li><a href="/contact">Contact</a></li>
+        <li><a href="/insights#newsletter">Newsletter</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-bottom-text">© 2026 Comcof Group. All rights reserved. Kampala, Uganda.</span>
+    <span class="footer-bottom-text">The Commerce of Coffee</span>
+  </div>
+</footer>
+
+<script src="/assets/world-land.js"></script>
+<script src="/assets/site.js"></script>
+</body>
+</html>
