@@ -1,0 +1,1377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Comcof Group — The Commerce of Coffee</title>
+<meta name="description" content="Comcof Group is building a vertically integrated coffee enterprise from Ugandan origins — sourcing and green coffee trade today, with processing, roasting, and branded coffee to follow.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600&family=DM+Sans:ital,opsz,wght@0,9..40,200;0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --espresso:#1A0A04;
+  --black:#0C0B0A;
+  --ivory:#F7F3EC;
+  --cream:#EDE5D5;
+  --parchment:#F0EAE0;
+  --gold:#B8933E;
+  --gold-light:#D4AF6A;
+  --gold-pale:#F0E4C4;
+  --green:#2C4A3A;
+  --green-mid:#3D6B55;
+  --green-light:#5A9478;
+  --charcoal:#2A2520;
+  --warm-gray:#8A7F72;
+  --mid-gray:#5C5650;
+  --light-line:rgba(184,147,62,0.18);
+  --serif:'Cormorant Garamond',Georgia,serif;
+  --sans:'DM Sans',system-ui,sans-serif;
+}
+
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:var(--sans);background:var(--black);color:var(--ivory);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar{width:3px}
+::-webkit-scrollbar-track{background:var(--black)}
+::-webkit-scrollbar-thumb{background:var(--gold)}
+
+/* ── SELECTION ── */
+::selection{background:var(--gold);color:var(--black)}
+
+/* ── NAV ── */
+#nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 4vw;display:flex;align-items:center;justify-content:space-between;height:72px;transition:all .4s ease;border-bottom:1px solid transparent}
+#nav.scrolled{background:rgba(12,11,10,0.97);border-bottom-color:var(--light-line);backdrop-filter:blur(12px)}
+.nav-logo{display:flex;align-items:center;gap:14px;text-decoration:none}
+.nav-logo-mark{width:36px;height:36px;flex-shrink:0}
+.nav-logo-text{font-family:var(--serif);font-size:1.25rem;font-weight:600;color:var(--ivory);letter-spacing:.04em}
+.nav-logo-sub{font-family:var(--sans);font-size:.55rem;font-weight:300;color:var(--gold);letter-spacing:.25em;text-transform:uppercase;display:block;margin-top:-2px}
+.nav-links{display:flex;align-items:center;gap:2rem}
+.nav-links a{font-family:var(--sans);font-size:.78rem;font-weight:400;color:rgba(247,243,236,.65);text-decoration:none;letter-spacing:.1em;text-transform:uppercase;transition:color .25s}
+.nav-links a:hover{color:var(--gold-light)}
+.nav-cta{padding:.55rem 1.4rem;border:1px solid var(--gold);color:var(--gold);font-family:var(--sans);font-size:.7rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;transition:all .25s;background:transparent}
+.nav-cta:hover{background:var(--gold);color:var(--black)}
+.nav-mobile-btn{display:none;background:none;border:none;cursor:pointer;flex-direction:column;gap:5px;padding:4px}
+.nav-mobile-btn span{display:block;width:24px;height:1px;background:var(--ivory);transition:.3s}
+
+/* ── HERO ── */
+#hero{position:relative;height:100vh;min-height:700px;display:flex;align-items:center;overflow:hidden}
+.hero-bg{position:absolute;inset:0;z-index:0}
+.hero-canvas{position:absolute;inset:0;width:100%;height:100%}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(135deg,rgba(12,11,10,0.92) 0%,rgba(26,10,4,0.75) 60%,rgba(44,74,58,0.3) 100%)}
+.hero-content{position:relative;z-index:2;padding:0 4vw;max-width:900px}
+.hero-eyebrow{font-family:var(--sans);font-size:.68rem;font-weight:400;letter-spacing:.35em;text-transform:uppercase;color:var(--gold);margin-bottom:1.8rem;display:flex;align-items:center;gap:.75rem;opacity:0;animation:fadeUp .8s .3s forwards}
+.hero-eyebrow::before{content:'';display:block;width:32px;height:1px;background:var(--gold)}
+.hero-h1{font-family:var(--serif);font-size:clamp(2.8rem,6vw,5.5rem);font-weight:300;line-height:1.1;color:var(--ivory);margin-bottom:1.5rem;opacity:0;animation:fadeUp .9s .5s forwards}
+.hero-h1 em{font-style:italic;color:var(--gold-light)}
+.hero-sub{font-family:var(--sans);font-size:clamp(.9rem,1.4vw,1.1rem);font-weight:300;line-height:1.75;color:rgba(247,243,236,.7);max-width:560px;margin-bottom:2.8rem;opacity:0;animation:fadeUp .9s .7s forwards}
+.hero-ctas{display:flex;align-items:center;gap:1.2rem;flex-wrap:wrap;opacity:0;animation:fadeUp .9s .9s forwards}
+.btn-primary{padding:.85rem 2.2rem;background:var(--gold);color:var(--black);font-family:var(--sans);font-size:.72rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;transition:all .3s;border:1px solid var(--gold)}
+.btn-primary:hover{background:var(--gold-light);border-color:var(--gold-light)}
+.btn-ghost{padding:.85rem 2.2rem;background:transparent;color:var(--ivory);font-family:var(--sans);font-size:.72rem;font-weight:400;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;border:1px solid rgba(247,243,236,.3);transition:all .3s}
+.btn-ghost:hover{border-color:var(--ivory);background:rgba(247,243,236,.06)}
+.hero-scroll{position:absolute;bottom:2.5rem;left:4vw;z-index:2;display:flex;align-items:center;gap:.8rem;opacity:0;animation:fadeUp .9s 1.2s forwards}
+.hero-scroll-line{width:40px;height:1px;background:var(--gold);transform-origin:left}
+.hero-scroll-text{font-family:var(--sans);font-size:.6rem;letter-spacing:.3em;text-transform:uppercase;color:var(--warm-gray)}
+.hero-stats{position:absolute;bottom:2.5rem;right:4vw;z-index:2;display:flex;gap:2.5rem;opacity:0;animation:fadeUp .9s 1.1s forwards}
+.hero-stat-num{font-family:var(--serif);font-size:1.8rem;font-weight:500;color:var(--gold-light);display:block;line-height:1}
+.hero-stat-label{font-family:var(--sans);font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:var(--warm-gray);margin-top:.3rem;display:block}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+
+/* ── SECTION BASE ── */
+section{padding:7rem 4vw}
+.section-eyebrow{font-family:var(--sans);font-size:.62rem;font-weight:400;letter-spacing:.35em;text-transform:uppercase;color:var(--gold);margin-bottom:1.2rem;display:flex;align-items:center;gap:.7rem}
+.section-eyebrow::before{content:'';display:block;width:24px;height:1px;background:var(--gold)}
+.section-h2{font-family:var(--serif);font-size:clamp(2rem,4vw,3.4rem);font-weight:300;line-height:1.2;color:var(--ivory)}
+.section-h2 em{font-style:italic;color:var(--gold-light)}
+.section-lead{font-family:var(--sans);font-size:clamp(.9rem,1.2vw,1.05rem);font-weight:300;line-height:1.8;color:rgba(247,243,236,.65);max-width:620px;margin-top:1.2rem}
+
+/* ── INTRO STRIP ── */
+#intro{background:var(--black);padding:5rem 4vw}
+.intro-inner{display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:center;max-width:1200px;margin:0 auto}
+.intro-text p{font-family:var(--sans);font-size:1rem;font-weight:300;line-height:1.85;color:rgba(247,243,236,.65);margin-top:1.5rem}
+.intro-text p strong{color:var(--ivory);font-weight:500}
+.intro-pillars{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem}
+.intro-pillar{padding:1.5rem;border:1px solid var(--light-line);background:rgba(184,147,62,.03);transition:border-color .3s,background .3s}
+.intro-pillar:hover{border-color:rgba(184,147,62,.4);background:rgba(184,147,62,.06)}
+.intro-pillar-icon{width:28px;height:28px;margin-bottom:.9rem}
+.intro-pillar h4{font-family:var(--serif);font-size:1rem;font-weight:500;color:var(--ivory);margin-bottom:.4rem}
+.intro-pillar p{font-size:.78rem;line-height:1.6;color:var(--warm-gray)}
+
+/* ── VALUE CHAIN ── */
+#value-chain{background:var(--espresso);overflow:hidden}
+.vc-header{text-align:center;max-width:700px;margin:0 auto 4rem}
+.vc-scroll-wrap{overflow-x:auto;padding-bottom:2rem}
+.vc-track{display:flex;gap:0;min-width:max-content;align-items:stretch;position:relative}
+.vc-step{padding:2rem 2.2rem;border-right:1px solid var(--light-line);min-width:200px;max-width:220px;position:relative;transition:background .3s}
+.vc-step:last-child{border-right:none}
+.vc-step:hover{background:rgba(184,147,62,.06)}
+.vc-step-num{font-family:var(--serif);font-size:2.8rem;font-weight:300;color:rgba(184,147,62,.15);line-height:1;margin-bottom:.8rem}
+.vc-step-title{font-family:var(--serif);font-size:1rem;font-weight:600;color:var(--ivory);margin-bottom:.6rem}
+.vc-step-text{font-size:.72rem;line-height:1.65;color:var(--warm-gray)}
+.vc-step-tag{margin-top:1rem;display:inline-block;font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);border:1px solid var(--light-line);padding:.25rem .65rem}
+.vc-arrow{position:absolute;top:2rem;right:-14px;z-index:1;color:var(--gold);font-size:.8rem;opacity:.5}
+.vc-hint{text-align:center;margin-top:1.5rem;font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--warm-gray)}
+
+/* ── ABOUT ── */
+#about{background:var(--black)}
+.about-grid{display:grid;grid-template-columns:1fr 1.4fr;gap:7rem;align-items:start;max-width:1200px;margin:0 auto}
+.about-sticky{position:sticky;top:7rem}
+.about-visual{position:relative}
+.about-box{background:var(--charcoal);padding:3rem;border:1px solid var(--light-line);position:relative;overflow:hidden}
+.about-box::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:linear-gradient(to bottom,var(--gold),var(--green-mid))}
+.about-box blockquote{font-family:var(--serif);font-size:1.4rem;font-weight:300;font-style:italic;line-height:1.6;color:var(--ivory);margin-bottom:1.5rem}
+.about-box cite{font-family:var(--sans);font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
+.about-content p{font-family:var(--sans);font-size:.97rem;font-weight:300;line-height:1.9;color:rgba(247,243,236,.65);margin-bottom:1.2rem}
+.about-content p strong{color:var(--ivory);font-weight:500}
+.about-mvv{display:grid;grid-template-columns:1fr;gap:1.5rem;margin-top:2rem}
+.mvv-item{padding:1.5rem;border-left:2px solid var(--gold)}
+.mvv-label{font-family:var(--sans);font-size:.6rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:.5rem}
+.mvv-text{font-family:var(--serif);font-size:1.05rem;font-weight:400;line-height:1.6;color:var(--ivory)}
+
+/* ── GROUP PAGE ── */
+#the-group{background:var(--charcoal)}
+.group-intro{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;max-width:1200px;margin:0 auto 5rem}
+.divisions-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--light-line);max-width:1200px;margin:0 auto}
+.division-card{background:var(--charcoal);padding:2.5rem 2rem;transition:background .3s}
+.division-card:hover{background:rgba(184,147,62,.06)}
+.division-num{font-family:var(--serif);font-size:1rem;color:var(--gold);margin-bottom:.8rem;display:block}
+.division-title{font-family:var(--serif);font-size:1.2rem;font-weight:500;color:var(--ivory);margin-bottom:.75rem}
+.division-text{font-size:.78rem;line-height:1.65;color:var(--warm-gray)}
+.division-more{display:inline-flex;align-items:center;gap:.4rem;margin-top:1rem;font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);text-decoration:none}
+.division-more::after{content:'→';transition:transform .2s}
+.division-more:hover::after{transform:translateX(4px)}
+
+/* ── COFFEE PAGE ── */
+#our-coffee{background:var(--black)}
+.coffee-hero-bar{background:var(--espresso);padding:3rem 4vw;margin-bottom:5rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:2rem;max-width:1200px;margin-left:auto;margin-right:auto}
+.coffee-products-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;max-width:1200px;margin:0 auto 5rem}
+.coffee-card{background:var(--charcoal);border:1px solid var(--light-line);overflow:hidden;transition:border-color .3s,transform .3s}
+.coffee-card:hover{border-color:rgba(184,147,62,.5);transform:translateY(-4px)}
+.coffee-card-badge{padding:.25rem .75rem;background:var(--green);display:inline-block;font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ivory);margin-bottom:.8rem}
+.coffee-card-body{padding:1.5rem}
+.coffee-card-title{font-family:var(--serif);font-size:1.15rem;font-weight:500;color:var(--ivory);margin-bottom:.5rem}
+.coffee-card-origin{font-size:.7rem;color:var(--gold);letter-spacing:.15em;text-transform:uppercase;margin-bottom:.8rem}
+.coffee-card-desc{font-size:.78rem;line-height:1.6;color:var(--warm-gray)}
+.coffee-card-specs{display:flex;gap:1rem;margin-top:1rem;padding-top:1rem;border-top:1px solid var(--light-line)}
+.coffee-spec{font-size:.65rem;color:var(--mid-gray);text-align:center;flex:1}
+.coffee-spec strong{display:block;font-size:.85rem;color:var(--gold-light);font-family:var(--serif);font-weight:500}
+.coffee-quality{background:var(--charcoal);padding:3rem;border:1px solid var(--light-line);max-width:1200px;margin:0 auto}
+.cq-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2rem;margin-top:2rem}
+.cq-item{text-align:center}
+.cq-icon{width:48px;height:48px;margin:0 auto .8rem;opacity:.8}
+.cq-title{font-family:var(--serif);font-size:1rem;font-weight:500;color:var(--ivory);margin-bottom:.3rem}
+.cq-text{font-size:.75rem;line-height:1.6;color:var(--warm-gray)}
+
+/* ── MAP / GLOBAL FOOTPRINT ── */
+#global-footprint{background:var(--espresso)}
+.gf-header{text-align:center;max-width:700px;margin:0 auto 4rem}
+.gf-map-container{position:relative;max-width:1200px;margin:0 auto;border:1px solid var(--light-line);overflow:hidden;background:rgba(44,74,58,.08)}
+.gf-map-canvas{width:100%;display:block}
+.gf-legend{display:flex;gap:2rem;justify-content:center;margin-top:2rem;flex-wrap:wrap}
+.gf-legend-item{display:flex;align-items:center;gap:.5rem;font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--warm-gray)}
+.gf-legend-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.hub-cards{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;max-width:1200px;margin:3rem auto 0}
+.hub-card{padding:1.5rem;border:1px solid var(--light-line);text-align:center;transition:border-color .3s}
+.hub-card:hover{border-color:var(--gold)}
+.hub-flag{font-size:1.5rem;margin-bottom:.5rem}
+.hub-city{font-family:var(--serif);font-size:.95rem;font-weight:500;color:var(--ivory);margin-bottom:.3rem}
+.hub-role{font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
+
+/* ── SUSTAINABILITY ── */
+#sustainability{background:var(--green);overflow:hidden;position:relative}
+#sustainability::before{content:'';position:absolute;top:-100px;right:-100px;width:500px;height:500px;border-radius:50%;background:rgba(93,148,120,.1);pointer-events:none}
+.sus-grid{display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:center;max-width:1200px;margin:0 auto}
+.sus-right{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem}
+.sus-card{padding:1.8rem;background:rgba(0,0,0,.2);border:1px solid rgba(255,255,255,.08);transition:background .3s}
+.sus-card:hover{background:rgba(0,0,0,.35)}
+.sus-icon{font-size:1.4rem;margin-bottom:.8rem}
+.sus-title{font-family:var(--serif);font-size:1.05rem;font-weight:500;color:var(--ivory);margin-bottom:.4rem}
+.sus-text{font-size:.75rem;line-height:1.6;color:rgba(247,243,236,.6)}
+.sus-stat{font-family:var(--serif);font-size:2.5rem;font-weight:300;color:var(--gold-light);margin:.5rem 0 .3rem}
+.sus-stat-label{font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(247,243,236,.5)}
+
+/* ── PARTNERS ── */
+#partners{background:var(--black)}
+.partners-intro{display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:start;max-width:1200px;margin:0 auto 5rem}
+.partner-types{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;max-width:1200px;margin:0 auto 4rem}
+.pt-card{padding:2rem;border:1px solid var(--light-line);position:relative;overflow:hidden;transition:border-color .3s}
+.pt-card::before{content:'';position:absolute;bottom:0;left:0;width:0;height:2px;background:var(--gold);transition:width .4s}
+.pt-card:hover{border-color:var(--light-line)}
+.pt-card:hover::before{width:100%}
+.pt-number{font-family:var(--serif);font-size:2rem;color:rgba(184,147,62,.2);font-weight:300}
+.pt-title{font-family:var(--serif);font-size:1.1rem;font-weight:500;color:var(--ivory);margin:.3rem 0 .6rem}
+.pt-text{font-size:.78rem;line-height:1.65;color:var(--warm-gray)}
+.pt-badge{margin-top:1rem;display:inline-block;font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:var(--green-light);border:1px solid rgba(93,148,120,.3);padding:.25rem .65rem}
+
+/* ── INQUIRY FORM ── */
+#contact-form-wrap{background:var(--charcoal);padding:4rem;max-width:1200px;margin:0 auto;border:1px solid var(--light-line)}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem}
+.form-group{display:flex;flex-direction:column;gap:.4rem}
+.form-group.full{grid-column:1/-1}
+.form-label{font-family:var(--sans);font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:var(--warm-gray)}
+.form-input,.form-select,.form-textarea{background:rgba(255,255,255,.03);border:1px solid var(--light-line);color:var(--ivory);font-family:var(--sans);font-size:.88rem;padding:.8rem 1rem;transition:border-color .25s;outline:none;width:100%}
+.form-input::placeholder,.form-textarea::placeholder{color:var(--mid-gray)}
+.form-input:focus,.form-select:focus,.form-textarea:focus{border-color:rgba(184,147,62,.5)}
+.form-select{appearance:none}
+.form-textarea{resize:vertical;min-height:120px}
+.form-submit{grid-column:1/-1;display:flex;justify-content:flex-end;margin-top:.5rem}
+
+/* ── INSIGHTS ── */
+#insights{background:var(--black)}
+.insights-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;max-width:1200px;margin:3rem auto 0}
+.insight-card{background:var(--charcoal);border:1px solid var(--light-line);overflow:hidden;transition:border-color .3s,transform .3s}
+.insight-card:hover{border-color:rgba(184,147,62,.5);transform:translateY(-3px)}
+.insight-card-top{padding:2rem;border-bottom:1px solid var(--light-line)}
+.insight-tag{font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;padding:.22rem .7rem;border:1px solid;display:inline-block;margin-bottom:.9rem}
+.insight-tag.market{color:var(--gold);border-color:rgba(184,147,62,.3)}
+.insight-tag.trade{color:var(--green-light);border-color:rgba(93,148,120,.3)}
+.insight-tag.company{color:var(--gold-light);border-color:rgba(212,175,106,.3)}
+.insight-title{font-family:var(--serif);font-size:1.1rem;font-weight:500;color:var(--ivory);line-height:1.4;margin-bottom:.6rem}
+.insight-excerpt{font-size:.78rem;line-height:1.65;color:var(--warm-gray)}
+.insight-card-foot{padding:1rem 2rem;display:flex;justify-content:space-between;align-items:center}
+.insight-date{font-size:.65rem;color:var(--mid-gray)}
+.insight-read{font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);text-decoration:none;display:flex;align-items:center;gap:.3rem}
+.insight-read:hover{color:var(--gold-light)}
+
+/* ── CONTACT ── */
+#contact{background:var(--espresso)}
+.contact-grid{display:grid;grid-template-columns:1fr 1.5fr;gap:6rem;max-width:1200px;margin:0 auto}
+.contact-info-item{margin-bottom:2rem}
+.contact-info-label{font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);margin-bottom:.4rem}
+.contact-info-value{font-family:var(--serif);font-size:1rem;color:var(--ivory);line-height:1.5}
+.contact-social{display:flex;gap:1rem;margin-top:2rem}
+.contact-social a{width:38px;height:38px;border:1px solid var(--light-line);display:flex;align-items:center;justify-content:center;color:var(--warm-gray);text-decoration:none;font-size:.75rem;transition:all .25s}
+.contact-social a:hover{border-color:var(--gold);color:var(--gold)}
+
+/* ── FOOTER ── */
+footer{background:var(--black);border-top:1px solid var(--light-line);padding:4rem 4vw 2.5rem}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:4rem;max-width:1200px;margin:0 auto 3rem}
+.footer-brand p{font-size:.82rem;line-height:1.75;color:var(--warm-gray);margin-top:1rem;max-width:280px}
+.footer-col h5{font-family:var(--sans);font-size:.62rem;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);margin-bottom:1.2rem}
+.footer-col ul{list-style:none}
+.footer-col ul li{margin-bottom:.65rem}
+.footer-col ul li a{font-size:.82rem;color:var(--warm-gray);text-decoration:none;transition:color .2s}
+.footer-col ul li a:hover{color:var(--ivory)}
+.footer-bottom{max-width:1200px;margin:0 auto;padding-top:2rem;border-top:1px solid var(--light-line);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.footer-bottom-text{font-size:.72rem;color:var(--mid-gray)}
+.footer-bottom-links{display:flex;gap:1.5rem}
+.footer-bottom-links a{font-size:.72rem;color:var(--mid-gray);text-decoration:none;transition:color .2s}
+.footer-bottom-links a:hover{color:var(--warm-gray)}
+
+/* ── SECTION DIVIDERS ── */
+.divider{height:1px;background:linear-gradient(to right,transparent,var(--gold),transparent);max-width:1200px;margin:0 auto}
+
+/* ── DARK BAND ── */
+.band-dark{background:var(--charcoal);padding:4rem 4vw;text-align:center}
+.band-dark h3{font-family:var(--serif);font-size:clamp(1.5rem,3vw,2.4rem);font-weight:300;color:var(--ivory);margin-bottom:1rem}
+.band-dark p{font-size:.9rem;color:var(--warm-gray);max-width:580px;margin:0 auto 2rem}
+
+/* ── NEWSLETTER ── */
+.newsletter-form{display:flex;gap:0;max-width:420px;margin:0 auto}
+.newsletter-input{flex:1;background:rgba(255,255,255,.04);border:1px solid var(--light-line);border-right:none;color:var(--ivory);font-family:var(--sans);font-size:.85rem;padding:.75rem 1.1rem;outline:none}
+.newsletter-input::placeholder{color:var(--mid-gray)}
+.newsletter-input:focus{border-color:rgba(184,147,62,.4)}
+.newsletter-btn{padding:.75rem 1.4rem;background:var(--gold);color:var(--black);border:1px solid var(--gold);font-family:var(--sans);font-size:.65rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;cursor:pointer;transition:all .25s;white-space:nowrap}
+.newsletter-btn:hover{background:var(--gold-light)}
+
+/* ── TIMELINE ── */
+.timeline{position:relative;max-width:900px;margin:3rem auto 0;padding-left:2rem}
+.timeline::before{content:'';position:absolute;top:0;left:0;width:1px;height:100%;background:linear-gradient(to bottom,var(--gold),var(--green-mid),transparent)}
+.tl-item{position:relative;padding-left:2.5rem;margin-bottom:2.5rem}
+.tl-item::before{content:'';position:absolute;left:-5px;top:.3rem;width:10px;height:10px;border-radius:50%;background:var(--gold);border:2px solid var(--black)}
+.tl-year{font-family:var(--sans);font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);margin-bottom:.3rem}
+.tl-title{font-family:var(--serif);font-size:1.1rem;font-weight:500;color:var(--ivory);margin-bottom:.3rem}
+.tl-text{font-size:.8rem;line-height:1.65;color:var(--warm-gray)}
+
+/* ── REVEAL ANIMATIONS ── */
+.reveal{opacity:0;transform:translateY(32px);transition:opacity .7s ease,transform .7s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-delay-1{transition-delay:.1s}
+.reveal-delay-2{transition-delay:.2s}
+.reveal-delay-3{transition-delay:.3s}
+.reveal-delay-4{transition-delay:.4s}
+
+/* ── MOBILE NAV ── */
+.mobile-nav{display:none;position:fixed;inset:0;background:var(--black);z-index:999;flex-direction:column;align-items:center;justify-content:center;gap:2rem}
+.mobile-nav.open{display:flex}
+.mobile-nav a{font-family:var(--serif);font-size:1.8rem;font-weight:300;color:var(--ivory);text-decoration:none}
+.mobile-nav a:hover{color:var(--gold)}
+.mobile-close{position:absolute;top:1.5rem;right:4vw;background:none;border:none;color:var(--ivory);font-size:1.5rem;cursor:pointer}
+
+/* ── RESPONSIVE ── */
+@media(max-width:900px){
+  .intro-inner,.about-grid,.group-intro,.sus-grid,.partners-intro,.contact-grid,.footer-grid{grid-template-columns:1fr;gap:3rem}
+  .about-sticky{position:static}
+  .divisions-grid,.partner-types{grid-template-columns:1fr 1fr}
+  .coffee-products-grid,.cq-grid{grid-template-columns:1fr 1fr}
+  .hub-cards,.insights-grid{grid-template-columns:1fr 1fr}
+  .nav-links,.nav-cta{display:none}
+  .nav-mobile-btn{display:flex}
+  .hero-stats{display:none}
+  .form-grid{grid-template-columns:1fr}
+  .form-group.full{grid-column:1}
+  .form-submit{justify-content:stretch}
+  .form-submit .btn-primary{width:100%;text-align:center}
+  .footer-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:600px){
+  section{padding:5rem 5vw}
+  .divisions-grid,.partner-types,.coffee-products-grid,.hub-cards,.insights-grid,.cq-grid{grid-template-columns:1fr}
+  .hero-h1{font-size:2.4rem}
+  .vc-step{min-width:160px}
+  .coffee-hero-bar{flex-direction:column}
+  .footer-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════ NAV ═══════════════ -->
+<nav id="nav">
+  <a href="#hero" class="nav-logo">
+    <svg class="nav-logo-mark" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="18" cy="18" r="17" stroke="#B8933E" stroke-width=".8" fill="none"/>
+      <path d="M8 18 C8 12 13 8 18 8 C23 8 28 12 28 18" stroke="#B8933E" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+      <path d="M10 22 C10 27 13.5 28 18 28 C22.5 28 26 27 26 22" stroke="#B8933E" stroke-width=".8" fill="none" stroke-linecap="round"/>
+      <circle cx="18" cy="18" r="3" fill="#B8933E" opacity=".9"/>
+      <line x1="18" y1="8" x2="18" y2="28" stroke="#B8933E" stroke-width=".5" opacity=".3"/>
+      <line x1="8" y1="18" x2="28" y2="18" stroke="#B8933E" stroke-width=".5" opacity=".3"/>
+    </svg>
+    <div>
+      <span class="nav-logo-text">Comcof Group</span>
+      <span class="nav-logo-sub">The Commerce of Coffee</span>
+    </div>
+  </a>
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#the-group">The Group</a>
+    <a href="#our-coffee">Our Coffee</a>
+    <a href="#global-footprint">Global</a>
+    <a href="#sustainability">Responsibility</a>
+    <a href="#partners">Partners</a>
+    <a href="#insights">Insights</a>
+  </div>
+  <a href="#contact" class="nav-cta">Contact</a>
+  <button class="nav-mobile-btn" onclick="document.querySelector('.mobile-nav').classList.toggle('open')" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- Mobile Nav -->
+<div class="mobile-nav">
+  <button class="mobile-close" onclick="document.querySelector('.mobile-nav').classList.remove('open')">✕</button>
+  <a href="#about" onclick="document.querySelector('.mobile-nav').classList.remove('open')">About</a>
+  <a href="#the-group" onclick="document.querySelector('.mobile-nav').classList.remove('open')">The Group</a>
+  <a href="#our-coffee" onclick="document.querySelector('.mobile-nav').classList.remove('open')">Our Coffee</a>
+  <a href="#global-footprint" onclick="document.querySelector('.mobile-nav').classList.remove('open')">Global</a>
+  <a href="#sustainability" onclick="document.querySelector('.mobile-nav').classList.remove('open')">Responsibility</a>
+  <a href="#partners" onclick="document.querySelector('.mobile-nav').classList.remove('open')">Partners</a>
+  <a href="#insights" onclick="document.querySelector('.mobile-nav').classList.remove('open')">Insights</a>
+  <a href="#contact" onclick="document.querySelector('.mobile-nav').classList.remove('open')">Contact</a>
+</div>
+
+<!-- ═══════════════ HERO ═══════════════ -->
+<section id="hero">
+  <div class="hero-bg">
+    <canvas class="hero-canvas" id="heroCanvas"></canvas>
+    <div class="hero-overlay"></div>
+  </div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Comcof Group — Kampala, Uganda</p>
+    <h1 class="hero-h1">The Commerce of Coffee,<br><em>Reimagined.</em></h1>
+    <p class="hero-sub">Building a vertically integrated coffee enterprise from Ugandan origins — sourcing and green coffee trade today, with roasting, distribution, and branded coffee planned as we grow.</p>
+    <div class="hero-ctas">
+      <a href="#the-group" class="btn-primary">Explore the Group</a>
+      <a href="#value-chain" class="btn-ghost">Our Value Chain</a>
+      <a href="#partners" class="btn-ghost">Partner With Us</a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <div class="hero-scroll-line"></div>
+    <span class="hero-scroll-text">Scroll to Explore</span>
+  </div>
+  <div class="hero-stats">
+    <div>
+      <span class="hero-stat-num">Uganda</span>
+      <span class="hero-stat-label">Origin Base</span>
+    </div>
+    <div>
+      <span class="hero-stat-num">9</span>
+      <span class="hero-stat-label">Value Chain Stages</span>
+    </div>
+    <div>
+      <span class="hero-stat-num">Global</span>
+      <span class="hero-stat-label">Market Ambition</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ INTRO ═══════════════ -->
+<section id="intro">
+  <div class="intro-inner">
+    <div class="intro-text reveal">
+      <div class="section-eyebrow">Who We Are</div>
+      <h2 class="section-h2">Building a New Standard in<br><em>Global Coffee Commerce</em></h2>
+      <p>Comcof Group is being built as a vertically integrated coffee multinational — designed to create sustainable value across the entire chain, from producing origins to the world's most demanding markets.</p>
+      <p>The name says it all: <strong>Comcof is the commerce of coffee</strong>. We are not a café group or a single-origin boutique. We are building a serious commercial enterprise, step by deliberate step, with the systems and long-term ambition to participate across every dimension of the global coffee economy.</p>
+      <p>Rooted in <strong>East Africa's coffee landscapes</strong>, anchored by Uganda as our home origin, and built with global commercial markets in view — Comcof Group is designed for the next 50 years.</p>
+    </div>
+    <div class="intro-pillars reveal reveal-delay-2">
+      <div class="intro-pillar">
+        <svg class="intro-pillar-icon" viewBox="0 0 28 28" fill="none">
+          <circle cx="14" cy="14" r="13" stroke="#B8933E" stroke-width=".8"/>
+          <path d="M7 14 L14 7 L21 14 L14 21 Z" stroke="#B8933E" stroke-width=".8" fill="none"/>
+          <circle cx="14" cy="14" r="3" fill="#B8933E" opacity=".6"/>
+        </svg>
+        <h4>Vertical Integration</h4>
+        <p>A model designed to span farm gate to final cup.</p>
+      </div>
+      <div class="intro-pillar">
+        <svg class="intro-pillar-icon" viewBox="0 0 28 28" fill="none">
+          <rect x="3" y="3" width="22" height="22" stroke="#B8933E" stroke-width=".8" fill="none"/>
+          <line x1="3" y1="14" x2="25" y2="14" stroke="#B8933E" stroke-width=".6"/>
+          <line x1="14" y1="3" x2="14" y2="25" stroke="#B8933E" stroke-width=".6"/>
+          <circle cx="14" cy="14" r="2" fill="#B8933E"/>
+        </svg>
+        <h4>Global Ambition</h4>
+        <p>Built in Uganda, designed to serve buyers across world markets.</p>
+      </div>
+      <div class="intro-pillar">
+        <svg class="intro-pillar-icon" viewBox="0 0 28 28" fill="none">
+          <path d="M14 3 L25 9 L25 19 L14 25 L3 19 L3 9 Z" stroke="#B8933E" stroke-width=".8" fill="none"/>
+          <path d="M14 8 L20 12 L20 18 L14 21 L8 18 L8 12 Z" stroke="#B8933E" stroke-width=".5" fill="none"/>
+        </svg>
+        <h4>Premium Quality</h4>
+        <p>Rigorous quality standards, applied from the first lot onward.</p>
+      </div>
+      <div class="intro-pillar">
+        <svg class="intro-pillar-icon" viewBox="0 0 28 28" fill="none">
+          <path d="M4 20 L10 12 L16 16 L22 6" stroke="#B8933E" stroke-width="1" fill="none" stroke-linecap="round"/>
+          <circle cx="4" cy="20" r="2" fill="#B8933E"/>
+          <circle cx="22" cy="6" r="2" fill="#B8933E"/>
+        </svg>
+        <h4>Built to Last</h4>
+        <p>A long-term company, designed for multi-generational scale.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ VALUE CHAIN ═══════════════ -->
+<section id="value-chain">
+  <div class="vc-header reveal">
+    <div class="section-eyebrow">Business Architecture</div>
+    <h2 class="section-h2">The Full <em>Value Chain</em></h2>
+    <p class="section-lead" style="margin:0 auto;text-align:center">Our model is designed to capture value at every stage — from the coffee farm to the final cup. Some stages are active today; others are being built, deliberately and in order.</p>
+  </div>
+  <div class="vc-scroll-wrap reveal">
+    <div class="vc-track">
+      <div class="vc-step">
+        <div class="vc-step-num">01</div>
+        <div class="vc-step-title">Origin Sourcing</div>
+        <div class="vc-step-text">Direct relationships with growers and cooperatives in Uganda, with the wider East African belt to follow. Building traceable supply chains from the ground up.</div>
+        <span class="vc-step-tag">Active</span>
+      </div>
+      <div class="vc-step">
+        <div class="vc-step-num">02</div>
+        <div class="vc-step-title">Processing & Value Addition</div>
+        <div class="vc-step-text">Hulling, sorting, and grading through established partner mills today, with our own capacity planned at origin. Capturing value before export.</div>
+        <span class="vc-step-tag">Via Partners</span>
+      </div>
+      <div class="vc-step">
+        <div class="vc-step-num">03</div>
+        <div class="vc-step-title">Green Coffee Trading</div>
+        <div class="vc-step-text">International trade in Ugandan green coffee, spot and forward. Building the market knowledge and buyer relationships this trade demands.</div>
+        <span class="vc-step-tag">Active</span>
+      </div>
+      <div class="vc-step">
+        <div class="vc-step-num">04</div>
+        <div class="vc-step-title">Warehousing & Logistics</div>
+        <div class="vc-step-text">Freight and storage handled with established logistics partners today. Our own warehousing in key commercial hubs is planned for later phases.</div>
+        <span class="vc-step-tag">Via Partners</span>
+      </div>
+      <div class="vc-step">
+        <div class="vc-step-num">05</div>
+        <div class="vc-step-title">Roasting & Packaging</div>
+        <div class="vc-step-text">A planned roasting and packaging arm for private-label and branded production. In development — not yet in operation.</div>
+        <span class="vc-step-tag">Planned</span>
+      </div>
+      <div class="vc-step">
+        <div class="vc-step-num">06</div>
+        <div class="vc-step-title">Distribution</div>
+        <div class="vc-step-text">Planned B2B and B2C distribution across target markets — hospitality, retail chains, food service, and specialty channels.</div>
+        <span class="vc-step-tag">Planned</span>
+      </div>
+      <div class="vc-step">
+        <div class="vc-step-num">07</div>
+        <div class="vc-step-title">Branded Products</div>
+        <div class="vc-step-text">A planned portfolio of branded coffee products for premium consumers, carrying African provenance as a brand asset.</div>
+        <span class="vc-step-tag">Planned</span>
+      </div>
+      <div class="vc-step">
+        <div class="vc-step-num">08</div>
+        <div class="vc-step-title">Retail & Experiences</div>
+        <div class="vc-step-text">Premium retail environments and coffee experiences, envisioned for later phases. The future consumer face of the Comcof brand.</div>
+        <span class="vc-step-tag">Planned</span>
+      </div>
+      <div class="vc-step">
+        <div class="vc-step-num">09</div>
+        <div class="vc-step-title">Market Intelligence</div>
+        <div class="vc-step-text">Market data and trade analysis that inform commercial decisions across the group — built in-house as we trade.</div>
+        <span class="vc-step-tag">Growing</span>
+      </div>
+    </div>
+  </div>
+  <p class="vc-hint">← Scroll to explore the chain →</p>
+</section>
+
+<!-- ═══════════════ ABOUT ═══════════════ -->
+<section id="about">
+  <div class="about-grid" style="max-width:1200px;margin:0 auto">
+    <div class="about-sticky">
+      <div class="section-eyebrow reveal">Our Story</div>
+      <h2 class="section-h2 reveal">Africa-Born.<br><em>Globally Built.</em></h2>
+      <div class="about-box reveal" style="margin-top:2.5rem">
+        <blockquote>"We are building Comcof for the long term — a company we intend the coffee world to recognise for generations."</blockquote>
+        <cite>— Comcof Group, Founding Vision</cite>
+      </div>
+    </div>
+    <div class="about-content">
+      <p class="reveal"><strong>Comcof Group takes its name from its purpose: the commerce of coffee.</strong> We exist to participate meaningfully across the entire economic architecture of one of the world's most traded commodities — doing so with scale, intelligence, and integrity.</p>
+      <p class="reveal">The company was conceived with a simple observation: Africa gave the world coffee and still grows some of its finest, yet has historically captured only a fraction of its value. Processing happens elsewhere. Roasting happens elsewhere. Branding happens elsewhere. The profit centres of the global coffee trade have largely sat outside the continent that makes it possible.</p>
+      <p class="reveal"><strong>Comcof Group is our response to that reality.</strong> We are building from origin — from Uganda and, in time, the broader East African coffee belt — outward into global markets. Deliberately, in phases, with each stage earned before the next begins.</p>
+      <p class="reveal">Our founding philosophy is patient and long term. We are not optimising for a short exit. We are building the systems, talent, and commercial relationships to be a serious participant in global coffee commerce for decades to come.</p>
+      <div class="about-mvv reveal">
+        <div class="mvv-item">
+          <div class="mvv-label">Mission</div>
+          <div class="mvv-text">To build the world's most complete African-rooted coffee enterprise — creating value across every stage of the global coffee chain.</div>
+        </div>
+        <div class="mvv-item">
+          <div class="mvv-label">Vision</div>
+          <div class="mvv-text">A world where African-grown coffee defines global standards, and African-built companies lead global commerce.</div>
+        </div>
+        <div class="mvv-item">
+          <div class="mvv-label">Values</div>
+          <div class="mvv-text">Integrity. Quality. Long-termism. African excellence. Commercial seriousness. Responsible growth.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ THE GROUP ═══════════════ -->
+<section id="the-group">
+  <div class="group-intro reveal">
+    <div>
+      <div class="section-eyebrow">Business Model</div>
+      <h2 class="section-h2">The Architecture<br>of a <em>Coffee Multinational</em></h2>
+    </div>
+    <div>
+      <p class="section-lead">Comcof Group is designed as a portfolio of interconnected divisions, each covering a specific segment of the coffee value chain. Some are operating today; others are planned for later phases. Together, they form the blueprint of an integrated enterprise.</p>
+    </div>
+  </div>
+  <div class="divisions-grid reveal">
+    <div class="division-card">
+      <span class="division-num">01</span>
+      <div class="division-title">Comcof Origins</div>
+      <p class="division-text">Direct sourcing in Uganda, where we are building relationships at farm level with growers and cooperatives — with expansion across the East African belt planned. Quality and accountability from the first point of harvest.</p>
+      <a href="#contact" class="division-more">Learn more</a>
+    </div>
+    <div class="division-card">
+      <span class="division-num">02</span>
+      <div class="division-title">Comcof Processing</div>
+      <p class="division-text">Origin-based hulling, sorting, and grading is central to our model — capturing value before the coffee leaves the origin country. Today we work through established partner facilities; our own processing capacity is planned as volumes grow, built to international export standards.</p>
+      <a href="#contact" class="division-more">Learn more</a>
+    </div>
+    <div class="division-card">
+      <span class="division-num">03</span>
+      <div class="division-title">Comcof Trade</div>
+      <p class="division-text">International green coffee trading is where Comcof is most active today. We supply traceable Ugandan green coffee, spot and forward, and are building relationships with roasters, importers, and institutional buyers in Europe, the Middle East, and beyond.</p>
+      <a href="#contact" class="division-more">Learn more</a>
+    </div>
+    <div class="division-card">
+      <span class="division-num">04</span>
+      <div class="division-title">Comcof Logistics</div>
+      <p class="division-text">Freight coordination and quality preservation from Kampala to our buyers' ports, managed today with established logistics partners. Our own bonded warehousing in hubs such as Dubai and Rotterdam is planned for later phases.</p>
+      <a href="#contact" class="division-more">Learn more</a>
+    </div>
+    <div class="division-card">
+      <span class="division-num">05</span>
+      <div class="division-title">Comcof Roasters</div>
+      <p class="division-text">A planned roasting arm for institutional supply, private-label production, and, in time, our own branded portfolio. Origin-roasted coffee is a core part of our long-term model — in development, not yet in operation.</p>
+      <a href="#contact" class="division-more">Learn more</a>
+    </div>
+    <div class="division-card">
+      <span class="division-num">06</span>
+      <div class="division-title">Comcof Brands</div>
+      <p class="division-text">A planned portfolio of branded coffee products for premium retail and e-commerce in global markets — designed to carry the story of African coffee provenance to the world's most discerning consumers. In development for later phases.</p>
+      <a href="#contact" class="division-more">Learn more</a>
+    </div>
+    <div class="division-card">
+      <span class="division-num">07</span>
+      <div class="division-title">Comcof Distribution</div>
+      <p class="division-text">Planned B2B supply to hospitality groups, food service chains, specialty retailers, and institutional buyers. Our distribution model is designed for commercial scale — consistent supply, reliable logistics, and the flexibility to serve diverse markets.</p>
+      <a href="#contact" class="division-more">Learn more</a>
+    </div>
+    <div class="division-card">
+      <span class="division-num">08</span>
+      <div class="division-title">Comcof Retail</div>
+      <p class="division-text">Premium coffee retail and consumer experiences, envisioned for key urban markets in later phases — where the group will one day present its full story to the public. Designed for global cities, with African soul.</p>
+      <a href="#contact" class="division-more">Learn more</a>
+    </div>
+    <div class="division-card">
+      <span class="division-num">09</span>
+      <div class="division-title">Comcof Intelligence</div>
+      <p class="division-text">Market data, commodity analysis, and research that inform decisions across the group — knowledge built by participating in the trade, not observing it, and shared with commercial partners as we grow.</p>
+      <a href="#contact" class="division-more">Learn more</a>
+    </div>
+  </div>
+
+  <!-- Timeline -->
+  <div style="max-width:900px;margin:6rem auto 0" class="reveal">
+    <div class="section-eyebrow">Growth Roadmap</div>
+    <h3 style="font-family:var(--serif);font-size:2rem;font-weight:300;color:var(--ivory);margin-bottom:.5rem">Building in Phases</h3>
+    <div class="timeline" style="margin-top:2.5rem">
+      <div class="tl-item">
+        <div class="tl-year">Phase I — Foundation (Where We Are Now)</div>
+        <div class="tl-title">Origin Operations & Trade Infrastructure</div>
+        <div class="tl-text">Establishing sourcing partnerships, processing capability, and international trading operations out of Uganda. Building the commercial relationships and quality systems that will underpin the group's long-term reputation.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">Phase II — Regional Expansion</div>
+        <div class="tl-title">East African Footprint & Logistics Network</div>
+        <div class="tl-text">Expanding sourcing across Ethiopia, Kenya, Tanzania, and DRC. Establishing warehousing in Mombasa, Djibouti, and first international hub in Dubai. Launching green coffee trading at commercial scale to European and Middle Eastern buyers.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">Phase III — Global Positioning</div>
+        <div class="tl-title">Roasting, Brands & Consumer Markets</div>
+        <div class="tl-text">Activating roasting capacity. Launching branded products in premium global markets. Establishing commercial presence in Amsterdam, Singapore, and New York. Beginning the transition from pure B2B to a mixed B2B/B2C enterprise.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-year">Phase IV — The Long Term</div>
+        <div class="tl-title">Full Multinational Commercial Enterprise</div>
+        <div class="tl-text">Comcof Group operating across all nine divisions at commercial scale. A recognised name in global coffee markets. Proof that a vertically integrated, African-rooted coffee multinational can be built — patiently, and for good.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ OUR COFFEE ═══════════════ -->
+<section id="our-coffee">
+  <div style="max-width:1200px;margin:0 auto">
+    <div class="section-eyebrow reveal">Our Coffee</div>
+    <h2 class="section-h2 reveal">Exceptional Coffee,<br><em>From Exceptional Origins</em></h2>
+    <p class="section-lead reveal">We source and trade Ugandan coffee — built on relationships, sustained by quality, and presented with the transparency serious buyers demand. Our range will grow as we do.</p>
+  </div>
+  <div class="coffee-products-grid" style="margin-top:3.5rem">
+    <div class="coffee-card reveal">
+      <div class="coffee-card-body">
+        <span class="coffee-card-badge">Green Coffee</span>
+        <div class="coffee-card-title">Uganda Robusta — Washed</div>
+        <div class="coffee-card-origin">Uganda — Rwenzori, Elgon</div>
+        <p class="coffee-card-desc">Screen 15–18, low defect count, moisture 11–12%. Bold, full-bodied, earthy undertones with exceptional blending value. Available bulk or container load.</p>
+        <div class="coffee-card-specs">
+          <div class="coffee-spec"><strong>FG-UG-R1</strong>Grade</div>
+          <div class="coffee-spec"><strong>Bulk</strong>Format</div>
+          <div class="coffee-spec"><strong>60kg</strong>Bags</div>
+        </div>
+      </div>
+    </div>
+    <div class="coffee-card reveal reveal-delay-1">
+      <div class="coffee-card-body">
+        <span class="coffee-card-badge" style="background:var(--gold)">Specialty</span>
+        <div class="coffee-card-title">Uganda Arabica — Natural</div>
+        <div class="coffee-card-origin">Uganda — Mt. Elgon Highlands</div>
+        <p class="coffee-card-desc">SCA 85–88 point range. Complex fruit-forward profile with floral and chocolate notes. Limited seasonal availability. Cupped at origin.</p>
+        <div class="coffee-card-specs">
+          <div class="coffee-spec"><strong>Specialty</strong>Grade</div>
+          <div class="coffee-spec"><strong>GrainPro</strong>Format</div>
+          <div class="coffee-spec"><strong>30kg</strong>Bags</div>
+        </div>
+      </div>
+    </div>
+    <div class="coffee-card reveal reveal-delay-2">
+      <div class="coffee-card-body">
+        <span class="coffee-card-badge" style="background:var(--charcoal);border:1px solid var(--light-line)">Coming Soon</span>
+        <div class="coffee-card-title">Ethiopian Sidama — Washed</div>
+        <div class="coffee-card-origin">Ethiopia — Sidama Zone</div>
+        <p class="coffee-card-desc">Bright acidity, jasmine florals, lemon citrus finish. Grade 1 / Grade 2 export quality. A benchmark East African profile we plan to offer as our sourcing expands beyond Uganda.</p>
+        <div class="coffee-card-specs">
+          <div class="coffee-spec"><strong>G1/G2</strong>Grade</div>
+          <div class="coffee-spec"><strong>Jute</strong>Format</div>
+          <div class="coffee-spec"><strong>60kg</strong>Bags</div>
+        </div>
+      </div>
+    </div>
+    <div class="coffee-card reveal reveal-delay-3">
+      <div class="coffee-card-body">
+        <span class="coffee-card-badge" style="background:var(--espresso);border:1px solid var(--gold)">Coming Soon</span>
+        <div class="coffee-card-title">Comcof Origin Roast</div>
+        <div class="coffee-card-origin">Blend — Uganda &amp; East Africa</div>
+        <p class="coffee-card-desc">Our planned signature roast for institutional and private-label clients — balanced, consistent, repeatable. In development alongside our roasting operations.</p>
+        <div class="coffee-card-specs">
+          <div class="coffee-spec"><strong>Whole</strong>Format</div>
+          <div class="coffee-spec"><strong>1kg</strong>Retail</div>
+          <div class="coffee-spec"><strong>Bulk</strong>Trade</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="coffee-quality reveal">
+    <div class="section-eyebrow">Quality Framework</div>
+    <h3 style="font-family:var(--serif);font-size:1.8rem;font-weight:300;color:var(--ivory)">Our Commitment to <em>Quality</em></h3>
+    <div class="cq-grid">
+      <div class="cq-item">
+        <svg class="cq-icon" viewBox="0 0 48 48" fill="none">
+          <circle cx="24" cy="24" r="22" stroke="#B8933E" stroke-width="1"/>
+          <path d="M15 24 L21 30 L33 18" stroke="#B8933E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <div class="cq-title">Traceable Origin</div>
+        <p class="cq-text">We record traceability data for every lot we source — farm or cooperative, region, process method, and harvest date.</p>
+      </div>
+      <div class="cq-item">
+        <svg class="cq-icon" viewBox="0 0 48 48" fill="none">
+          <rect x="10" y="10" width="28" height="28" stroke="#B8933E" stroke-width="1" fill="none"/>
+          <path d="M24 16 L24 32 M16 24 L32 24" stroke="#B8933E" stroke-width="1" stroke-linecap="round"/>
+          <circle cx="24" cy="24" r="4" stroke="#B8933E" stroke-width=".8"/>
+        </svg>
+        <div class="cq-title">Cupping Standards</div>
+        <p class="cq-text">Lots are cupped against SCA protocol, and we will not call a coffee specialty without independent Q-grader verification.</p>
+      </div>
+      <div class="cq-item">
+        <svg class="cq-icon" viewBox="0 0 48 48" fill="none">
+          <path d="M10 36 L16 20 L24 28 L32 14 L38 22" stroke="#B8933E" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          <circle cx="38" cy="22" r="3" fill="#B8933E"/>
+        </svg>
+        <div class="cq-title">Export-Grade Prep</div>
+        <p class="cq-text">Green coffee prepared to destination market specification. Moisture, defect count, screen size, and bag presentation to international standard.</p>
+      </div>
+      <div class="cq-item">
+        <svg class="cq-icon" viewBox="0 0 48 48" fill="none">
+          <circle cx="24" cy="24" r="12" stroke="#B8933E" stroke-width="1" fill="none"/>
+          <circle cx="24" cy="24" r="22" stroke="#B8933E" stroke-width=".5" fill="none"/>
+          <line x1="24" y1="2" x2="24" y2="10" stroke="#B8933E" stroke-width="1" stroke-linecap="round"/>
+          <line x1="24" y1="38" x2="24" y2="46" stroke="#B8933E" stroke-width="1" stroke-linecap="round"/>
+          <line x1="2" y1="24" x2="10" y2="24" stroke="#B8933E" stroke-width="1" stroke-linecap="round"/>
+          <line x1="38" y1="24" x2="46" y2="24" stroke="#B8933E" stroke-width="1" stroke-linecap="round"/>
+        </svg>
+        <div class="cq-title">Private Label — In Development</div>
+        <p class="cq-text">We are developing white-label and private-label capability for roasted and packaged coffee — from roast profile development to packaging and fulfilment.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ GLOBAL FOOTPRINT ═══════════════ -->
+<section id="global-footprint">
+  <div class="gf-header reveal">
+    <div class="section-eyebrow">Planned Global Network</div>
+    <h2 class="section-h2">Designed for<br><em>World Markets</em></h2>
+    <p class="section-lead" style="margin:0 auto;text-align:center">Comcof Group is designed to operate across the full geography of global coffee. Today we work from Kampala; the network below shows where we are building toward.</p>
+  </div>
+  <div class="gf-map-container reveal" style="margin-top:3rem">
+    <canvas id="worldMap" class="gf-map-canvas" height="440"></canvas>
+  </div>
+  <div class="gf-legend">
+    <div class="gf-legend-item"><div class="gf-legend-dot" style="background:#B8933E"></div>Origin Base</div>
+    <div class="gf-legend-item"><div class="gf-legend-dot" style="background:#3D6B55"></div>Planned Trade Hubs</div>
+    <div class="gf-legend-item"><div class="gf-legend-dot" style="background:#D4AF6A"></div>Target Markets</div>
+  </div>
+
+  <div class="hub-cards reveal">
+    <div class="hub-card"><div class="hub-flag">🇺🇬</div><div class="hub-city">Kampala</div><div class="hub-role">Origin HQ — Today</div></div>
+    <div class="hub-card"><div class="hub-flag">🇪🇹</div><div class="hub-city">Addis Ababa</div><div class="hub-role">Planned Origin</div></div>
+    <div class="hub-card"><div class="hub-flag">🇦🇪</div><div class="hub-city">Dubai</div><div class="hub-role">Planned Trade Hub</div></div>
+    <div class="hub-card"><div class="hub-flag">🇳🇱</div><div class="hub-city">Amsterdam</div><div class="hub-role">Target Market</div></div>
+    <div class="hub-card"><div class="hub-flag">🇸🇬</div><div class="hub-city">Singapore</div><div class="hub-role">Target Market</div></div>
+    <div class="hub-card"><div class="hub-flag">🇬🇧</div><div class="hub-city">London</div><div class="hub-role">Target Market</div></div>
+    <div class="hub-card"><div class="hub-flag">🇺🇸</div><div class="hub-city">New York</div><div class="hub-role">Target Market</div></div>
+    <div class="hub-card"><div class="hub-flag">🇰🇪</div><div class="hub-city">Nairobi</div><div class="hub-role">Planned Regional</div></div>
+  </div>
+</section>
+
+<!-- ═══════════════ SUSTAINABILITY ═══════════════ -->
+<section id="sustainability">
+  <div class="sus-grid">
+    <div class="reveal">
+      <div class="section-eyebrow" style="color:var(--gold-light)">Responsibility</div>
+      <h2 class="section-h2" style="color:var(--ivory)">Responsible Growth<br><em>Is Our Strategy</em></h2>
+      <p style="font-family:var(--sans);font-size:.97rem;font-weight:300;line-height:1.85;color:rgba(247,243,236,.65);margin-top:1.2rem;max-width:520px">
+        Sustainability is not a department at Comcof Group. It is embedded in our commercial logic. We believe that long-term value creation and responsible business practice are not competing priorities — they are the same priority.
+      </p>
+      <p style="font-family:var(--sans);font-size:.97rem;font-weight:300;line-height:1.85;color:rgba(247,243,236,.65);margin-top:1rem;max-width:520px">
+        From the farm relationships we build in Uganda to the traceability systems we invest in at origin — and from the fair commercial terms we apply with our supply partners to the quality standards we bring to every market — Comcof Group is committed to being a company that makes the coffee world better.
+      </p>
+      <div style="display:flex;gap:3rem;margin-top:2.5rem;flex-wrap:wrap">
+        <div><div class="sus-stat">Farm-Level</div><div class="sus-stat-label">Traceability by Design</div></div>
+        <div><div class="sus-stat">Direct</div><div class="sus-stat-label">Farmer Relationships</div></div>
+        <div><div class="sus-stat">Origin</div><div class="sus-stat-label">Value Capture</div></div>
+      </div>
+    </div>
+    <div class="sus-right reveal reveal-delay-2">
+      <div class="sus-card">
+        <div class="sus-icon">🌱</div>
+        <div class="sus-title">Farmer Partnership</div>
+        <p class="sus-text">Direct relationships with growers. Fair pricing, technical support, and long-term purchasing commitments that give farmers the stability to invest in quality.</p>
+      </div>
+      <div class="sus-card">
+        <div class="sus-icon">🔍</div>
+        <div class="sus-title">Full Traceability</div>
+        <p class="sus-text">We are building traceability from farm to export. Our standard: every commercial lot tracked back to its origin, process, and date of harvest.</p>
+      </div>
+      <div class="sus-card">
+        <div class="sus-icon">🌍</div>
+        <div class="sus-title">African Value Addition</div>
+        <p class="sus-text">We aim to process, grade, and in time roast at origin — keeping economic value in the countries that grow the coffee, not just those that drink it.</p>
+      </div>
+      <div class="sus-card">
+        <div class="sus-icon">♻️</div>
+        <div class="sus-title">Climate-Conscious Growth</div>
+        <p class="sus-text">We factor climate risk, water use, and environmental impact into every operational decision. Building a business that will still be standing in 50 years requires treating the planet seriously.</p>
+      </div>
+      <div class="sus-card">
+        <div class="sus-icon">⚖️</div>
+        <div class="sus-title">Ethical Commerce</div>
+        <p class="sus-text">We operate with integrity. No shortcuts on quality. No extractive commercial terms. No compromising on the standards we set for ourselves or our partners.</p>
+      </div>
+      <div class="sus-card">
+        <div class="sus-icon">📊</div>
+        <div class="sus-title">Transparent Reporting</div>
+        <p class="sus-text">As we grow, we commit to transparent reporting on our environmental, social, and governance performance — holding ourselves accountable to the standards we profess.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ PARTNERS ═══════════════ -->
+<section id="partners">
+  <div class="partners-intro">
+    <div class="reveal">
+      <div class="section-eyebrow">Trade & Partners</div>
+      <h2 class="section-h2">Built for<br><em>Serious Partners</em></h2>
+    </div>
+    <div class="reveal reveal-delay-1">
+      <p class="section-lead">Comcof Group is structured to be a reliable, commercially intelligent partner for the world's most demanding coffee businesses. Whether you are a major roaster, an institutional buyer, a logistics partner, or a strategic investor — we are built to engage at your level.</p>
+      <a href="#contact" class="btn-primary" style="display:inline-block;margin-top:2rem">Enquire Now</a>
+    </div>
+  </div>
+  <div class="partner-types reveal">
+    <div class="pt-card">
+      <div class="pt-number">01</div>
+      <div class="pt-title">Roasters & Importers</div>
+      <p class="pt-text">We supply Ugandan green coffee to commercial and specialty roasters — forward contracts, spot supply, and bespoke sourcing programmes tailored to your roast requirements.</p>
+      <span class="pt-badge">Green Coffee Supply</span>
+    </div>
+    <div class="pt-card">
+      <div class="pt-number">02</div>
+      <div class="pt-title">Institutional Buyers</div>
+      <p class="pt-text">We are building toward large-volume supply for food service groups, hotel chains, and retail accounts — with flexible contract structures designed for institutional procurement teams.</p>
+      <span class="pt-badge">Bulk & Contract Supply</span>
+    </div>
+    <div class="pt-card">
+      <div class="pt-number">03</div>
+      <div class="pt-title">Private Label Partners</div>
+      <p class="pt-text">We are developing private-label and white-label coffee production — from roast profile development to packaging design and fulfilment. Your brand, African provenance.</p>
+      <span class="pt-badge">Private Label</span>
+    </div>
+    <div class="pt-card">
+      <div class="pt-number">04</div>
+      <div class="pt-title">Logistics & Trade Partners</div>
+      <p class="pt-text">We work with freight forwarders, bonded warehouse operators, and logistics platforms to manage the movement of coffee from origin to destination.</p>
+      <span class="pt-badge">Logistics & Freight</span>
+    </div>
+    <div class="pt-card">
+      <div class="pt-number">05</div>
+      <div class="pt-title">Strategic Investors</div>
+      <p class="pt-text">Comcof Group is designed to attract institutional capital that understands long-term value creation in global commodity and branded consumer markets. We engage with serious, aligned capital partners.</p>
+      <span class="pt-badge">Investment</span>
+    </div>
+    <div class="pt-card">
+      <div class="pt-number">06</div>
+      <div class="pt-title">Development Partners</div>
+      <p class="pt-text">We welcome collaboration with development finance institutions, NGOs, and government bodies on programmes that improve quality, traceability, farmer income, and market access across the East African coffee belt.</p>
+      <span class="pt-badge">Development Finance</span>
+    </div>
+  </div>
+
+  <div id="contact-form-wrap" class="reveal">
+    <div class="section-eyebrow">Trade Enquiry</div>
+    <h3 style="font-family:var(--serif);font-size:1.8rem;font-weight:300;color:var(--ivory);margin-bottom:2rem">Start a Conversation</h3>
+    <div class="form-grid">
+      <div class="form-group">
+        <label class="form-label">First Name</label>
+        <input type="text" class="form-input" placeholder="First name">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Last Name</label>
+        <input type="text" class="form-input" placeholder="Last name">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Company</label>
+        <input type="text" class="form-input" placeholder="Organisation name">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Email</label>
+        <input type="email" class="form-input" placeholder="your@company.com">
+      </div>
+      <div class="form-group full">
+        <label class="form-label">Nature of Enquiry</label>
+        <select class="form-select form-input">
+          <option value="">Select enquiry type</option>
+          <option>Green Coffee Supply</option>
+          <option>Private Label / White Label</option>
+          <option>Bulk / Institutional Purchase</option>
+          <option>Logistics & Trade Partnership</option>
+          <option>Investment & Strategic Partnership</option>
+          <option>General Enquiry</option>
+        </select>
+      </div>
+      <div class="form-group full">
+        <label class="form-label">Message</label>
+        <textarea class="form-textarea" placeholder="Tell us about your requirements, volume, target markets, or what you'd like to discuss…"></textarea>
+      </div>
+      <div class="form-submit">
+        <a href="mailto:trade@comcofgroup.com?subject=Trade%20Enquiry" class="btn-primary">Submit Enquiry</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ INSIGHTS ═══════════════ -->
+<section id="insights">
+  <div style="max-width:1200px;margin:0 auto">
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:1.5rem" class="reveal">
+      <div>
+        <div class="section-eyebrow">Insights & Intelligence</div>
+        <h2 class="section-h2">From the<br><em>Comcof Desk</em></h2>
+      </div>
+      <span class="btn-ghost" style="display:inline-block;cursor:default;opacity:.6">More Coming Soon</span>
+    </div>
+  </div>
+  <div class="insights-grid">
+    <div class="insight-card reveal">
+      <div class="insight-card-top">
+        <span class="insight-tag market">Market Intelligence</span>
+        <div class="insight-title">East African Arabica Premiums in a Shifting Global Market</div>
+        <p class="insight-excerpt">Our first market briefing will look at how East African origin premiums behave against ICE arabica futures — and what quality differentiation and traceable supply mean for buyers in Europe and the Gulf.</p>
+      </div>
+      <div class="insight-card-foot"><span class="insight-date">In preparation</span><span class="insight-read" style="opacity:.55">Coming Soon</span></div>
+    </div>
+    <div class="insight-card reveal reveal-delay-1">
+      <div class="insight-card-top">
+        <span class="insight-tag trade">Trade & Logistics</span>
+        <div class="insight-title">Dubai as a Coffee Trade Gateway: The Case for Gulf-Based Warehousing</div>
+        <p class="insight-excerpt">Why the UAE's position as a re-export hub makes Dubai a compelling future logistics anchor for African coffee exporters with ambitions in Asia and Europe — the thinking behind our own planned hub.</p>
+      </div>
+      <div class="insight-card-foot"><span class="insight-date">In preparation</span><span class="insight-read" style="opacity:.55">Coming Soon</span></div>
+    </div>
+    <div class="insight-card reveal reveal-delay-2">
+      <div class="insight-card-top">
+        <span class="insight-tag company">Company Perspective</span>
+        <div class="insight-title">Why African Coffee Companies Must Capture Downstream Value</div>
+        <p class="insight-excerpt">Africa grows some of the world's finest coffee, yet African companies control only a fraction of the profits generated from it. The structural case for vertically integrated, African-rooted coffee enterprises has never been stronger. That case is why Comcof Group exists.</p>
+      </div>
+      <div class="insight-card-foot"><span class="insight-date">July 2026</span><span class="insight-read" style="opacity:.55">Founding Note</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ CTA BAND ═══════════════ -->
+<div class="band-dark reveal">
+  <h3>Ready to Work with Comcof Group?</h3>
+  <p>Whether you are a buyer, a roaster, a logistics partner, an investor, or simply someone who believes in what we are building — we want to hear from you.</p>
+  <a href="#contact" class="btn-primary">Get in Touch</a>
+</div>
+
+<!-- ═══════════════ NEWSLETTER ═══════════════ -->
+<div style="background:var(--espresso);padding:4rem 4vw;text-align:center" class="reveal">
+  <p style="font-family:var(--sans);font-size:.65rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:.8rem">Comcof Intelligence</p>
+  <h3 style="font-family:var(--serif);font-size:1.8rem;font-weight:300;color:var(--ivory);margin-bottom:.8rem">Market Insights. Trade Intelligence.<br>Straight to Your Inbox.</h3>
+  <p style="font-size:.85rem;color:var(--warm-gray);max-width:480px;margin:0 auto 2rem">The Comcof Desk — our briefing on East African coffee markets, global trade, and the group's progress. Launching soon; subscribe to be among the first readers.</p>
+  <div class="newsletter-form" style="margin:0 auto">
+    <input type="email" class="newsletter-input" placeholder="your@company.com">
+    <button class="newsletter-btn">Subscribe</button>
+  </div>
+</div>
+
+<!-- ═══════════════ CONTACT ═══════════════ -->
+<section id="contact">
+  <div class="contact-grid">
+    <div class="reveal">
+      <div class="section-eyebrow">Contact</div>
+      <h2 class="section-h2" style="margin-bottom:2.5rem">Let's Build<br><em>Something</em></h2>
+      <div class="contact-info-item">
+        <div class="contact-info-label">Headquarters</div>
+        <div class="contact-info-value">Kampala, Uganda<br>East Africa</div>
+      </div>
+      <div class="contact-info-item">
+        <div class="contact-info-label">Trade Enquiries</div>
+        <div class="contact-info-value">trade@comcofgroup.com</div>
+      </div>
+      <div class="contact-info-item">
+        <div class="contact-info-label">Partnerships</div>
+        <div class="contact-info-value">partners@comcofgroup.com</div>
+      </div>
+      <div class="contact-info-item">
+        <div class="contact-info-label">General</div>
+        <div class="contact-info-value">info@comcofgroup.com</div>
+      </div>
+      <div class="contact-social">
+        <a href="#" title="LinkedIn">in</a>
+        <a href="#" title="Twitter">X</a>
+        <a href="#" title="Instagram">ig</a>
+      </div>
+    </div>
+    <div class="reveal reveal-delay-2">
+      <div style="background:var(--charcoal);padding:3rem;border:1px solid var(--light-line)">
+        <h4 style="font-family:var(--serif);font-size:1.3rem;font-weight:400;color:var(--ivory);margin-bottom:2rem">Send Us a Message</h4>
+        <div class="form-grid">
+          <div class="form-group">
+            <label class="form-label">Full Name</label>
+            <input type="text" class="form-input" placeholder="Your name">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Email Address</label>
+            <input type="email" class="form-input" placeholder="your@email.com">
+          </div>
+          <div class="form-group full">
+            <label class="form-label">Subject</label>
+            <input type="text" class="form-input" placeholder="How can we help?">
+          </div>
+          <div class="form-group full">
+            <label class="form-label">Message</label>
+            <textarea class="form-textarea" placeholder="Your message…" style="min-height:100px"></textarea>
+          </div>
+          <div class="form-submit">
+            <a href="mailto:info@comcofgroup.com" class="btn-primary">Send Message</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ FOOTER ═══════════════ -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="#hero" class="nav-logo" style="text-decoration:none">
+        <svg width="32" height="32" viewBox="0 0 36 36" fill="none">
+          <circle cx="18" cy="18" r="17" stroke="#B8933E" stroke-width=".8" fill="none"/>
+          <path d="M8 18 C8 12 13 8 18 8 C23 8 28 12 28 18" stroke="#B8933E" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+          <path d="M10 22 C10 27 13.5 28 18 28 C22.5 28 26 27 26 22" stroke="#B8933E" stroke-width=".8" fill="none" stroke-linecap="round"/>
+          <circle cx="18" cy="18" r="3" fill="#B8933E" opacity=".9"/>
+        </svg>
+        <div>
+          <span style="font-family:var(--serif);font-size:1.1rem;font-weight:600;color:var(--ivory)">Comcof Group</span>
+          <span style="font-family:var(--sans);font-size:.5rem;font-weight:300;color:var(--gold);letter-spacing:.25em;text-transform:uppercase;display:block">The Commerce of Coffee</span>
+        </div>
+      </a>
+      <p>A coffee enterprise being built from Ugandan origins — vertically integrated by design, made for the world's markets, and built for the long term.</p>
+    </div>
+    <div class="footer-col">
+      <h5>The Group</h5>
+      <ul>
+        <li><a href="#about">About Comcof</a></li>
+        <li><a href="#the-group">Business Divisions</a></li>
+        <li><a href="#value-chain">Value Chain</a></li>
+        <li><a href="#the-group">Growth Roadmap</a></li>
+        <li><a href="#sustainability">Responsibility</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Trade</h5>
+      <ul>
+        <li><a href="#our-coffee">Green Coffee</a></li>
+        <li><a href="#our-coffee">Roasted Coffee</a></li>
+        <li><a href="#partners">Private Label</a></li>
+        <li><a href="#partners">Bulk Supply</a></li>
+        <li><a href="#global-footprint">Global Network</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Connect</h5>
+      <ul>
+        <li><a href="#insights">Insights</a></li>
+        <li><a href="#partners">Partners</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a href="#">LinkedIn</a></li>
+        <li><a href="#">Newsletter</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-bottom-text">© 2026 Comcof Group. All rights reserved. Kampala, Uganda.</span>
+    <div class="footer-bottom-links">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms of Use</a>
+      <a href="#">Cookie Preferences</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ── NAV SCROLL ──
+window.addEventListener('scroll',()=>{
+  const nav=document.getElementById('nav');
+  nav.classList.toggle('scrolled',window.scrollY>60);
+});
+
+// ── HERO CANVAS ──
+(function(){
+  const canvas=document.getElementById('heroCanvas');
+  const ctx=canvas.getContext('2d');
+  let W,H,particles=[];
+
+  function resize(){
+    W=canvas.width=canvas.offsetWidth;
+    H=canvas.height=canvas.offsetHeight;
+  }
+  resize();
+  window.addEventListener('resize',()=>{resize();init()});
+
+  class Particle{
+    constructor(){this.reset()}
+    reset(){
+      this.x=Math.random()*W;
+      this.y=Math.random()*H;
+      this.r=Math.random()*1.5+.3;
+      this.vx=(Math.random()-.5)*.18;
+      this.vy=(Math.random()-.5)*.18;
+      this.alpha=Math.random()*.4+.05;
+      this.life=0;this.maxLife=Math.random()*400+200;
+    }
+    update(){
+      this.x+=this.vx;this.y+=this.vy;
+      this.life++;
+      if(this.life>this.maxLife||this.x<0||this.x>W||this.y<0||this.y>H)this.reset();
+    }
+    draw(){
+      ctx.beginPath();
+      ctx.arc(this.x,this.y,this.r,0,Math.PI*2);
+      ctx.fillStyle=`rgba(184,147,62,${this.alpha})`;
+      ctx.fill();
+    }
+  }
+
+  // Grid lines
+  function drawGrid(){
+    ctx.strokeStyle='rgba(184,147,62,0.04)';
+    ctx.lineWidth=.5;
+    const step=80;
+    for(let x=0;x<W;x+=step){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,H);ctx.stroke()}
+    for(let y=0;y<H;y+=step){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke()}
+  }
+
+  // Connection lines
+  function drawConnections(){
+    for(let i=0;i<particles.length;i++){
+      for(let j=i+1;j<particles.length;j++){
+        const dx=particles[i].x-particles[j].x;
+        const dy=particles[i].y-particles[j].y;
+        const d=Math.sqrt(dx*dx+dy*dy);
+        if(d<120){
+          ctx.beginPath();
+          ctx.moveTo(particles[i].x,particles[i].y);
+          ctx.lineTo(particles[j].x,particles[j].y);
+          ctx.strokeStyle=`rgba(184,147,62,${.06*(1-d/120)})`;
+          ctx.lineWidth=.5;
+          ctx.stroke();
+        }
+      }
+    }
+  }
+
+  function init(){
+    particles=[];
+    const count=Math.floor((W*H)/18000);
+    for(let i=0;i<count;i++)particles.push(new Particle());
+  }
+  init();
+
+  function loop(){
+    ctx.clearRect(0,0,W,H);
+    // Deep gradient background
+    const grd=ctx.createLinearGradient(0,0,W,H);
+    grd.addColorStop(0,'#0C0B0A');
+    grd.addColorStop(.5,'#1A0A04');
+    grd.addColorStop(1,'#0C1810');
+    ctx.fillStyle=grd;ctx.fillRect(0,0,W,H);
+    drawGrid();
+    drawConnections();
+    particles.forEach(p=>{p.update();p.draw()});
+    requestAnimationFrame(loop);
+  }
+  loop();
+})();
+
+// ── WORLD MAP CANVAS ──
+(function(){
+  const canvas=document.getElementById('worldMap');
+  if(!canvas)return;
+  const ctx=canvas.getContext('2d');
+  const W=canvas.offsetWidth||1200;
+  const H=440;
+  canvas.width=W;canvas.height=H;
+
+  // Map projection (rough equirectangular)
+  function ll2xy(lat,lon){
+    const x=(lon+180)*(W/360);
+    const y=(90-lat)*(H/180);
+    return{x,y};
+  }
+
+  // Draw map background
+  ctx.fillStyle='#0D1A12';
+  ctx.fillRect(0,0,W,H);
+
+  // Draw subtle latitude lines
+  ctx.strokeStyle='rgba(184,147,62,0.06)';
+  ctx.lineWidth=.5;
+  for(let lat=-60;lat<=80;lat+=20){
+    const y=ll2xy(lat,0).y;
+    ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke();
+  }
+  for(let lon=-180;lon<=180;lon+=30){
+    const x=ll2xy(0,lon).x;
+    ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,H);ctx.stroke();
+  }
+
+  // Draw continent outlines (simplified)
+  function drawContinent(points,fillColor,strokeColor){
+    ctx.beginPath();
+    const first=ll2xy(points[0][0],points[0][1]);
+    ctx.moveTo(first.x,first.y);
+    points.slice(1).forEach(p=>{const pt=ll2xy(p[0],p[1]);ctx.lineTo(pt.x,pt.y)});
+    ctx.closePath();
+    ctx.fillStyle=fillColor;ctx.fill();
+    ctx.strokeStyle=strokeColor;ctx.lineWidth=.5;ctx.stroke();
+  }
+
+  // Africa
+  drawContinent([[37,-17],[15,-17],[-35,-17],[-35,52],[12,52],[37,52],[37,-17]],'rgba(44,74,58,0.25)','rgba(93,148,120,0.3)');
+  // Rough Africa (more realistic)
+  ctx.beginPath();
+  const africa=[[37,-17],[30,-15],[22,-17],[15,-17],[5,-15],[-5,-10],[-10,0],[-15,12],[-25,15],[-35,20],[-35,32],[-30,42],[-15,47],[-5,50],[5,52],[15,52],[25,52],[37,45],[40,38],[40,28],[37,22],[37,10],[37,-5],[37,-17]];
+  const aFirst=ll2xy(africa[0][0],africa[0][1]);
+  ctx.moveTo(aFirst.x,aFirst.y);
+  africa.slice(1).forEach(p=>{const pt=ll2xy(p[0],p[1]);ctx.lineTo(pt.x,pt.y)});
+  ctx.closePath();
+  ctx.fillStyle='rgba(44,74,58,0.3)';ctx.fill();
+  ctx.strokeStyle='rgba(93,148,120,0.35)';ctx.lineWidth=.6;ctx.stroke();
+
+  // Europe
+  const europe=[[72,0],[72,35],[50,42],[45,28],[43,20],[38,16],[36,10],[36,-5],[45,-10],[55,-10],[60,-5],[65,10],[72,0]];
+  const eFirst=ll2xy(europe[0][0],europe[0][1]);
+  ctx.beginPath();ctx.moveTo(eFirst.x,eFirst.y);
+  europe.slice(1).forEach(p=>{const pt=ll2xy(p[0],p[1]);ctx.lineTo(pt.x,pt.y)});
+  ctx.closePath();ctx.fillStyle='rgba(44,58,74,0.2)';ctx.fill();ctx.strokeStyle='rgba(93,120,148,0.25)';ctx.stroke();
+
+  // Asia (simplified)
+  const asia=[[75,25],[75,145],[10,145],[1,110],[1,100],[10,75],[20,60],[25,37],[30,30],[30,25],[75,25]];
+  const asFirst=ll2xy(asia[0][0],asia[0][1]);
+  ctx.beginPath();ctx.moveTo(asFirst.x,asFirst.y);
+  asia.slice(1).forEach(p=>{const pt=ll2xy(p[0],p[1]);ctx.lineTo(pt.x,pt.y)});
+  ctx.closePath();ctx.fillStyle='rgba(44,58,74,0.18)';ctx.fill();ctx.strokeStyle='rgba(93,120,148,0.2)';ctx.stroke();
+
+  // Americas
+  const amer=[[72,-170],[72,-50],[50,-50],[20,-60],[10,-80],[-5,-80],[-60,-70],[-60,-50],[-5,-35],[5,-50],[10,-68],[20,-87],[35,-115],[45,-124],[52,-130],[65,-168],[72,-170]];
+  const amFirst=ll2xy(amer[0][0],amer[0][1]);
+  ctx.beginPath();ctx.moveTo(amFirst.x,amFirst.y);
+  amer.slice(1).forEach(p=>{const pt=ll2xy(p[0],p[1]);ctx.lineTo(pt.x,pt.y)});
+  ctx.closePath();ctx.fillStyle='rgba(44,58,74,0.15)';ctx.fill();ctx.strokeStyle='rgba(93,120,148,0.2)';ctx.stroke();
+
+  // ── CITIES ──
+  const cities=[
+    {lat:0.3,lon:32.6,label:'Kampala',type:'origin',size:10},
+    {lat:9.0,lon:38.7,label:'Addis Ababa',type:'origin',size:8},
+    {lat:-1.3,lon:36.8,label:'Nairobi',type:'origin',size:7},
+    {lat:25.2,lon:55.3,label:'Dubai',type:'hub',size:9},
+    {lat:52.4,lon:4.9,label:'Amsterdam',type:'hub',size:8},
+    {lat:1.35,lon:103.8,label:'Singapore',type:'market',size:8},
+    {lat:51.5,lon:-0.1,label:'London',type:'market',size:7},
+    {lat:40.7,lon:-74.0,label:'New York',type:'market',size:7},
+  ];
+
+  const colors={origin:'#B8933E',hub:'#3D6B55',market:'#D4AF6A'};
+
+  // Draw trade routes first
+  const routes=[
+    ['Kampala','Dubai'],['Kampala','Amsterdam'],
+    ['Addis Ababa','Dubai'],['Dubai','Singapore'],
+    ['Amsterdam','London'],['Amsterdam','New York'],
+    ['Nairobi','Dubai'],
+  ];
+  const cityMap={};
+  cities.forEach(c=>{cityMap[c.label]=ll2xy(c.lat,c.lon)});
+
+  routes.forEach(([a,b])=>{
+    const p1=cityMap[a],p2=cityMap[b];
+    if(!p1||!p2)return;
+    // Bezier arc
+    const mx=(p1.x+p2.x)/2;
+    const my=(p1.y+p2.y)/2-40;
+    ctx.beginPath();
+    ctx.moveTo(p1.x,p1.y);
+    ctx.quadraticCurveTo(mx,my,p2.x,p2.y);
+    ctx.strokeStyle='rgba(184,147,62,0.2)';
+    ctx.lineWidth=.8;ctx.setLineDash([3,5]);ctx.stroke();
+    ctx.setLineDash([]);
+  });
+
+  // Draw city dots
+  cities.forEach(c=>{
+    const {x,y}=ll2xy(c.lat,c.lon);
+    const col=colors[c.type];
+    // Pulse ring
+    ctx.beginPath();ctx.arc(x,y,c.size+4,0,Math.PI*2);
+    ctx.strokeStyle=col+'44';ctx.lineWidth=.8;ctx.stroke();
+    ctx.beginPath();ctx.arc(x,y,c.size,0,Math.PI*2);
+    ctx.strokeStyle=col+'88';ctx.lineWidth=.8;ctx.stroke();
+    // Fill dot
+    ctx.beginPath();ctx.arc(x,y,c.size/2,0,Math.PI*2);
+    ctx.fillStyle=col;ctx.fill();
+    // Label
+    ctx.fillStyle=col;
+    ctx.font=`500 11px 'DM Sans', sans-serif`;
+    ctx.fillText(c.label,x+c.size+5,y+4);
+  });
+
+  // Animate pulsing rings
+  let frame=0;
+  function animateMap(){
+    frame++;
+    cities.forEach((c,i)=>{
+      const {x,y}=ll2xy(c.lat,c.lon);
+      const col=colors[c.type];
+      const phase=(frame*0.02+i*1.2)%(Math.PI*2);
+      const r=c.size+4+(Math.sin(phase)+1)*6;
+      const alpha=.15*(1-(r-c.size-4)/12);
+      ctx.beginPath();ctx.arc(x,y,r,0,Math.PI*2);
+      ctx.strokeStyle=col.replace(')',`,${alpha})`).replace('rgb','rgba').replace('#','');
+      // simpler approach:
+      ctx.strokeStyle=`rgba(184,147,62,${alpha.toFixed(2)})`;
+      ctx.lineWidth=.6;ctx.stroke();
+    });
+    requestAnimationFrame(animateMap);
+  }
+  animateMap();
+})();
+
+// ── SCROLL REVEAL ──
+(function(){
+  const els=document.querySelectorAll('.reveal');
+  const io=new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target)}});
+  },{threshold:.12,rootMargin:'0px 0px -40px 0px'});
+  els.forEach(el=>io.observe(el));
+})();
+</script>
+</body>
+</html>
