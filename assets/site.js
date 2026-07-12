@@ -89,11 +89,6 @@
 
   function loop(){
     ctx.clearRect(0,0,W,H);
-    const grd=ctx.createLinearGradient(0,0,W,H);
-    grd.addColorStop(0,'#0C0B0A');
-    grd.addColorStop(.5,'#1A0A04');
-    grd.addColorStop(1,'#0C1810');
-    ctx.fillStyle=grd;ctx.fillRect(0,0,W,H);
     drawGrid();
     drawConnections();
     particles.forEach(p=>{p.update();p.draw()});
@@ -169,6 +164,7 @@
     {lat:9.0,lon:38.7,label:'Addis Ababa',type:'origin',size:5,dx:9,dy:-4,align:'left'},
     {lat:-1.3,lon:36.8,label:'Nairobi',type:'origin',size:4.5,dx:9,dy:12,align:'left'},
     {lat:25.2,lon:55.3,label:'Dubai',type:'hub',size:5.5,dx:9,dy:4,align:'left'},
+    {lat:46.2,lon:6.15,label:'Geneva',type:'hub',size:5.5,dx:-9,dy:12,align:'right'},
     {lat:52.4,lon:4.9,label:'Amsterdam',type:'market',size:5,dx:9,dy:-4,align:'left'},
     {lat:1.35,lon:103.8,label:'Singapore',type:'market',size:5,dx:9,dy:4,align:'left'},
     {lat:51.5,lon:-0.1,label:'London',type:'market',size:5,dx:-9,dy:8,align:'right'},
@@ -178,7 +174,7 @@
 
   // Trade routes
   const routes=[
-    ['Kampala','Dubai'],['Kampala','Amsterdam'],
+    ['Kampala','Dubai'],['Kampala','Amsterdam'],['Kampala','Geneva'],
     ['Addis Ababa','Dubai'],['Dubai','Singapore'],
     ['Amsterdam','London'],['Amsterdam','New York'],
     ['Nairobi','Dubai'],
