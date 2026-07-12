@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 460 220" width="460" height="220">
+  <rect width="460" height="220" fill="#1A0A04"/>
+  <g stroke="#B8933E" stroke-opacity=".07" stroke-width="1">
+    <path d="M0 45 H460 M0 90 H460 M0 135 H460 M0 180 H460"/>
+  </g>
+  <!-- axes -->
+  <path d="M62 30 V182 H412" stroke="#B8933E" stroke-opacity=".45" stroke-width="1.2" fill="none"/>
+  <path d="M62 30 L58 40 M62 30 L66 40 M412 182 L402 178 M412 182 L402 186" stroke="#B8933E" stroke-opacity=".45" stroke-width="1.2" fill="none"/>
+  <!-- ICE futures line: volatile, softening -->
+  <path d="M62 96 L98 84 L128 108 L158 92 L192 124 L226 110 L258 140 L292 126 L324 150 L358 142 L396 156" stroke="#8A7F72" stroke-width="1.4" fill="none" stroke-linejoin="round"/>
+  <circle cx="396" cy="156" r="3" fill="#8A7F72"/>
+  <!-- East African premium line: firm, rising -->
+  <path d="M62 120 L108 112 L156 100 L204 96 L252 84 L300 78 L348 62 L396 52" stroke="#D4AF6A" stroke-width="1.8" fill="none" stroke-linejoin="round"/>
+  <circle cx="396" cy="52" r="3.5" fill="#D4AF6A"/>
+  <!-- premium gap markers -->
+  <g stroke="#B8933E" stroke-width="1" stroke-dasharray="2 4">
+    <path d="M204 96 V122 M300 78 V128 M396 52 V156"/>
+  </g>
+  <!-- bean marker on premium line -->
+  <g transform="translate(348 62)">
+    <ellipse rx="6" ry="8.5" transform="rotate(-24)" stroke="#B8933E" stroke-width="1.2" fill="#1A0A04"/>
+    <path d="M-2 -6.5 C 2.5 -2.5, -2.5 3, 2 7" stroke="#B8933E" stroke-width="1" fill="none" stroke-linecap="round"/>
+  </g>
+</svg>
