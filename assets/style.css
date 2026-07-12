@@ -274,6 +274,19 @@ footer{background:var(--black);border-top:1px solid var(--light-line);padding:4r
 .tl-title{font-family:var(--serif);font-size:1.1rem;font-weight:500;color:var(--ivory);margin-bottom:.3rem}
 .tl-text{font-size:.8rem;line-height:1.65;color:var(--warm-gray)}
 
+/* ── ORIGIN PHOTOGRAPHY ── */
+.photo-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;max-width:1200px;margin:0 auto}
+.photo-fig{margin:0;position:relative;overflow:hidden;border:1px solid var(--light-line)}
+.photo-fig img{width:100%;height:340px;object-fit:cover;display:block;filter:saturate(.92);transition:transform .6s ease}
+.photo-fig:hover img{transform:scale(1.03)}
+.photo-fig figcaption,.photo-wide figcaption{position:absolute;left:0;right:0;bottom:0;padding:2.4rem 1.3rem 1rem;background:linear-gradient(to top,rgba(12,11,10,.85),transparent);font-family:var(--sans);font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-pale)}
+.photo-wide{max-width:1200px;margin:0 auto;position:relative;overflow:hidden;border:1px solid var(--light-line)}
+.photo-wide img{width:100%;height:min(460px,54vw);object-fit:cover;display:block;filter:saturate(.92)}
+@media(max-width:600px){
+  .photo-strip{grid-template-columns:1fr}
+  .photo-fig img{height:240px}
+}
+
 /* ── LEGAL PAGES ── */
 .legal-body{max-width:760px;margin:0 auto;padding:4rem 4vw 6rem}
 .legal-body h2{font-family:var(--serif);font-size:1.35rem;font-weight:500;color:var(--ivory);margin:2.5rem 0 .8rem}
