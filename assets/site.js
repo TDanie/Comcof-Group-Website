@@ -16,6 +16,46 @@
   els.forEach(el=>io.observe(el));
 })();
 
+// ── CAREERS APPLICATION FORM ──
+(function(){
+  document.querySelectorAll('.apply-form').forEach(function(form){
+    form.addEventListener('submit',function(e){
+      e.preventDefault();
+      var msg=form.querySelector('.form-msg');
+      var role=form.getAttribute('data-role')||'Role';
+      var fields=form.querySelectorAll('[data-f]');
+      var missing=[];
+      var lines=['Application for: '+role,''];
+      fields.forEach(function(el){
+        var val=(el.value||'').trim();
+        el.style.borderColor='';
+        if(el.required&&!val){missing.push(el);el.style.borderColor='rgba(217,142,106,.7)'}
+        lines.push(el.getAttribute('data-f')+': '+(val||'(not provided)'));
+      });
+      var email=form.querySelector('#af-email');
+      if(email&&email.value&&!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim())){
+        missing.push(email);email.style.borderColor='rgba(217,142,106,.7)';
+      }
+      var consent=form.querySelector('#af-consent');
+      if(consent&&!consent.checked)missing.push(consent);
+      if(missing.length){
+        msg.textContent='Please complete the required fields marked *, provide a valid email address, and tick the consent box.';
+        msg.className='form-msg error show';
+        missing[0].focus();
+        return;
+      }
+      lines.push('','Consent: confirmed by applicant on the form at comcofgroup.com','Reminder to applicant: attach your CV before sending.');
+      var name=(form.querySelector('#af-name').value||'').trim();
+      var href='mailto:info@comcofgroup.com'
+        +'?subject='+encodeURIComponent('Application: '+role+' - '+name)
+        +'&body='+encodeURIComponent(lines.join('\n'));
+      msg.textContent='Your email application has opened in your mail app. Attach your CV (PDF preferred), then press send. If nothing opened, email info@comcofgroup.com with the subject "Application: '+role+'".';
+      msg.className='form-msg success show';
+      window.location.href=href;
+    });
+  });
+})();
+
 // ── HERO CANVAS (home page only) ──
 (function(){
   const canvas=document.getElementById('heroCanvas');
