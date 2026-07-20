@@ -2,7 +2,8 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { getActiveProducts } from "@/lib/catalog";
 import { ProductGrid } from "@/components/ProductGrid";
-import { isCommerceConfigured, contact } from "@/lib/env";
+import { contact } from "@/lib/env";
+import { deliveryRates, freeDeliveryOver } from "@/lib/founding";
 
 export const metadata: Metadata = {
   title: "Comcof Shop",
@@ -37,7 +38,6 @@ const categories = [
 
 export default async function ShopHome() {
   const products = await getActiveProducts();
-  const live = isCommerceConfigured() && products.length > 0;
 
   return (
     <>
@@ -104,34 +104,53 @@ export default async function ShopHome() {
 
       <section className="section" style={{ paddingTop: 0 }}>
         <div className="wrap">
-          <div className="eyebrow">{live ? "Available Now" : "First Releases"}</div>
-          {live ? (
+          <div className="eyebrow">Founding Releases · Coming Soon</div>
+          <h2 className="h-display" style={{ fontSize: "clamp(1.6rem,3vw,2.2rem)" }}>
+            The First Roast <em>Is Coming</em>
+          </h2>
+          <p className="lead">
+            Three founding releases at launch pricing. Reserve now and pay on
+            delivery when the roast lands; every reservation is confirmed
+            personally by our team, in order.
+          </p>
+          <div style={{ marginTop: "1.5rem" }}>
             <ProductGrid products={products.slice(0, 6)} />
-          ) : (
-            <div className="empty-state">
-              <h3>Our first retail releases are being prepared.</h3>
-              <p>
-                We sell only what we have genuinely sourced, cupped, and
-                packed, so the catalogue opens when the coffee is ready rather
-                than before. Leave your email and you will be first to know,
-                or order directly today and we will handle it personally.
-              </p>
-              <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
-                <a
-                  className="btn-primary"
-                  href={`mailto:${contact.email}?subject=Comcof%20Shop%20launch%20list`}
-                >
-                  Join the Launch List
-                </a>
-                <a
-                  className="btn-ghost"
-                  href={`mailto:${contact.email}?subject=Coffee%20order%20enquiry`}
-                >
-                  Order by Email Today
-                </a>
+          </div>
+          <p style={{ marginTop: "1.6rem", fontSize: ".78rem", color: "var(--warm-gray)" }}>
+            Want to hear about every release?{" "}
+            <a href={`mailto:${contact.email}?subject=Comcof%20Shop%20launch%20list`} style={{ color: "var(--gold-light)" }}>
+              Join the launch list
+            </a>
+            .
+          </p>
+        </div>
+      </section>
+
+      <section className="section" style={{ paddingTop: 0 }}>
+        <div className="wrap">
+          <div className="eyebrow">Delivery</div>
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
+              gap: "1px",
+              background: "var(--light-line)",
+              border: "1px solid var(--light-line)",
+            }}
+          >
+            {deliveryRates.map((r) => (
+              <div key={r.zone} style={{ background: "var(--black)", padding: "1.4rem" }}>
+                <div style={{ fontSize: ".68rem", letterSpacing: ".16em", textTransform: "uppercase", color: "var(--gold)", marginBottom: ".4rem" }}>
+                  {r.zone}
+                </div>
+                <div style={{ fontFamily: "var(--serif)", fontSize: "1.1rem" }}>{r.fee}</div>
+                <div style={{ fontSize: ".72rem", color: "var(--warm-gray)", marginTop: ".2rem" }}>{r.estimate}</div>
               </div>
-            </div>
-          )}
+            ))}
+          </div>
+          <p style={{ marginTop: ".9rem", fontSize: ".75rem", color: "var(--warm-gray)" }}>
+            Planned launch delivery rates for when ordering opens; free delivery above {freeDeliveryOver}.
+          </p>
         </div>
       </section>
 

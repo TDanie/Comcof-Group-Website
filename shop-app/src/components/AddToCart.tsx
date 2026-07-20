@@ -21,7 +21,7 @@ export function AddToCart({
   if (variants.length === 0) {
     return (
       <p style={{ marginTop: "1.4rem", fontSize: ".85rem", color: "var(--warm-gray)" }}>
-        This product is not currently available to order online.
+        Coming soon. This release is in preparation; join the launch list at info@comcofgroup.com and you will be first to know when it lands.
       </p>
     );
   }

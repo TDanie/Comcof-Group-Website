@@ -1,5 +1,6 @@
 import { getServerSupabase } from "@/lib/supabase/server";
 import type { Product, Variant } from "@/lib/types";
+import { foundingProducts, foundingVariants } from "@/lib/founding";
 
 /**
  * Catalogue data access. Every function returns an empty result in LAUNCH
@@ -66,7 +67,22 @@ export async function getActiveProducts(
   filters: CatalogFilters = {}
 ): Promise<Product[]> {
   const supabase = getServerSupabase();
-  if (!supabase) return [];
+  if (!supabase) {
+    // LAUNCH mode: the announced founding releases (real pre-order
+    // products) with in-memory filtering.
+    return foundingProducts.filter((p) => {
+      if (filters.roast && p.roastProfile !== filters.roast) return false;
+      if (filters.origin && p.originCountry !== filters.origin) return false;
+      if (filters.gift && !p.giftSuitable) return false;
+      if (filters.subscription && !p.subscriptionEligible) return false;
+      if (
+        filters.q &&
+        !p.name.toLowerCase().includes(filters.q.toLowerCase())
+      )
+        return false;
+      return true;
+    });
+  }
   let query = supabase.from("products").select("*").eq("status", "active");
   if (filters.roast) query = query.eq("roast_profile", filters.roast);
   if (filters.origin) query = query.eq("origin_country", filters.origin);
@@ -83,7 +99,11 @@ export async function getProductBySlug(slug: string): Promise<{
   variants: Variant[];
 } | null> {
   const supabase = getServerSupabase();
-  if (!supabase) return null;
+  if (!supabase) {
+    const product = foundingProducts.find((p) => p.slug === slug);
+    if (!product) return null;
+    return { product, variants: foundingVariants[slug] ?? [] };
+  }
   const { data: p } = await supabase
     .from("products")
     .select("*")
