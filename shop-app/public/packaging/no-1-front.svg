@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 780" width="620" height="780" role="img" aria-label="COMCOF No. 1 coffee bag, front">
+  <defs>
+    <linearGradient id="bag" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#100D0B"/>
+      <stop offset="0.14" stop-color="#1C1714"/>
+      <stop offset="0.5" stop-color="#221C18"/>
+      <stop offset="0.86" stop-color="#171310"/>
+      <stop offset="1" stop-color="#0D0B0A"/>
+    </linearGradient>
+    <linearGradient id="seal" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#0E0C0A"/>
+      <stop offset="0.5" stop-color="#2A2420"/>
+      <stop offset="1" stop-color="#0E0C0A"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="620" height="780" fill="#0C0B0A"/>
+
+  <!-- bag body -->
+  <rect x="140" y="96" width="340" height="600" rx="4" fill="url(#bag)"/>
+  <!-- top seal -->
+  <rect x="140" y="78" width="340" height="30" fill="url(#seal)"/>
+  <path d="M140 108 H480" stroke="#000" stroke-opacity=".55" stroke-width="1"/>
+  <!-- side fold shadows -->
+  <rect x="178" y="108" width="1" height="588" fill="#000" opacity=".35"/>
+  <rect x="441" y="108" width="1" height="588" fill="#000" opacity=".35"/>
+  <!-- base shadow -->
+  <ellipse cx="310" cy="702" rx="176" ry="12" fill="#000" opacity=".5"/>
+
+  <!-- degassing valve -->
+  <circle cx="310" cy="628" r="17" fill="none" stroke="#3A322B" stroke-width="1"/>
+  <circle cx="310" cy="628" r="6" fill="#3A322B" opacity=".55"/>
+
+  <!-- logo -->
+  <g transform="translate(310 235) scale(0.46)" fill="none">
+    <ellipse cx="0" cy="0" rx="186" ry="62" stroke="#F7F3EC" stroke-width="11"/>
+    <text x="-148" y="21" font-family="Poppins, DM Sans, sans-serif" font-weight="800" font-size="58" fill="#F7F3EC" textLength="190" lengthAdjust="spacingAndGlyphs">COMC</text>
+    <circle cx="76" cy="0" r="23" fill="#F7F3EC"/>
+    <path d="M66 -15 C 84 -6, 68 6, 86 15" stroke="#1C1714" stroke-width="6" stroke-linecap="round"/>
+    <text x="112" y="21" font-family="Poppins, DM Sans, sans-serif" font-weight="800" font-size="58" fill="#F7F3EC" textLength="34" lengthAdjust="spacingAndGlyphs">F</text>
+  </g>
+
+  <!-- NO. 1 -->
+  <text x="310" y="420" text-anchor="middle" font-family="Cormorant Garamond, Georgia, serif" font-size="96" font-weight="300" fill="#F7F3EC" letter-spacing="4">NO. 1</text>
+
+  <!-- gold rule: the only gold on the face -->
+  <path d="M272 452 H348" stroke="#B8933E" stroke-width="1.5"/>
+
+  <!-- descriptors -->
+  <text x="310" y="500" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="15" font-weight="400" fill="#CFC7BC" letter-spacing="6">EVERYDAY COFFEE</text>
+  <text x="310" y="530" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="13" font-weight="300" fill="#8A7F72" letter-spacing="5">MEDIUM ROAST</text>
+
+  <!-- weight -->
+  <text x="310" y="586" text-anchor="middle" font-family="DM Sans, sans-serif" font-size="12" font-weight="400" fill="#8A7F72" letter-spacing="4">250 g</text>
+</svg>

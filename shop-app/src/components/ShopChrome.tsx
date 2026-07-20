@@ -1,10 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
-import { useCart } from "@/components/CartProvider";
+import { NO1_SLUG } from "@/lib/founding";
 
-function Logo({ height = 38 }: { height?: number }) {
+function Logo({ height = 34 }: { height?: number }) {
   return (
     <svg
       style={{ height, width: "auto", color: "var(--ivory)", display: "block" }}
@@ -12,7 +11,7 @@ function Logo({ height = 38 }: { height?: number }) {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       role="img"
-      aria-label="Comcof"
+      aria-label="COMCOF"
     >
       <ellipse cx="200" cy="75" rx="186" ry="62" stroke="currentColor" strokeWidth="11" />
       <text x="52" y="96" fontFamily="var(--sans)" fontWeight="800" fontSize="58" fill="currentColor" textLength="190" lengthAdjust="spacingAndGlyphs">COMC</text>
@@ -23,124 +22,77 @@ function Logo({ height = 38 }: { height?: number }) {
   );
 }
 
-const links = [
-  { href: "/shop", label: "Shop" },
-  { href: "/shop/coffee", label: "Coffee" },
-  { href: "/shop/gifts", label: "Gifts" },
-  { href: "/shop/subscriptions", label: "Subscriptions" },
-  { href: "/shop/corporate", label: "Corporate" },
-];
+const linkStyle: React.CSSProperties = {
+  fontSize: ".68rem",
+  letterSpacing: ".18em",
+  textTransform: "uppercase",
+  color: "rgba(247,243,236,.5)",
+  textDecoration: "none",
+};
 
 export function ShopNav() {
-  const { count } = useCart();
-  const [open, setOpen] = useState(false);
   return (
     <header
       style={{
-        position: "sticky", top: 0, zIndex: 100,
-        background: "rgba(12,11,10,0.97)", borderBottom: "1px solid var(--light-line)",
-        backdropFilter: "blur(12px)",
+        position: "sticky",
+        top: 0,
+        zIndex: 100,
+        background: "rgba(12,11,10,.88)",
+        backdropFilter: "blur(14px)",
       }}
     >
       <nav
         aria-label="Shop"
         style={{
-          maxWidth: "var(--w-page)", margin: "0 auto", padding: "0 4vw",
-          display: "flex", alignItems: "center", justifyContent: "space-between", height: 72,
+          maxWidth: "var(--w-page)",
+          margin: "0 auto",
+          padding: "0 4vw",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          height: 78,
         }}
       >
-        <Link href="/shop" aria-label="Comcof Shop home" style={{ textDecoration: "none" }}>
+        <Link href="/shop" aria-label="COMCOF Shop home" style={{ textDecoration: "none" }}>
           <Logo />
         </Link>
-        <div className="shopnav-links" style={{ display: "flex", gap: "1.8rem", alignItems: "center" }}>
-          {links.map((l) => (
-            <Link
-              key={l.href}
-              href={l.href}
-              style={{
-                fontSize: ".76rem", letterSpacing: ".1em", textTransform: "uppercase",
-                color: "rgba(247,243,236,.65)", textDecoration: "none",
-              }}
-            >
-              {l.label}
-            </Link>
-          ))}
-        </div>
-        <div style={{ display: "flex", gap: "1rem", alignItems: "center" }}>
-          <a
-            href="https://comcofgroup.com"
-            style={{ fontSize: ".68rem", letterSpacing: ".12em", textTransform: "uppercase", color: "var(--warm-gray)", textDecoration: "none" }}
-            className="shopnav-links"
-          >
+        <div style={{ display: "flex", gap: "2rem", alignItems: "center" }}>
+          <Link href={`/shop/products/${NO1_SLUG}`} style={linkStyle}>
+            No. 1
+          </Link>
+          <a href="https://comcofgroup.com" style={linkStyle}>
             Comcof Group
           </a>
-          <Link
-            href="/shop/cart"
-            aria-label={`Cart, ${count} item${count === 1 ? "" : "s"}`}
-            style={{
-              display: "flex", alignItems: "center", gap: ".5rem",
-              border: "1px solid var(--gold)", color: "var(--gold)",
-              padding: ".5rem 1.1rem", fontSize: ".68rem", letterSpacing: ".12em",
-              textTransform: "uppercase", textDecoration: "none",
-            }}
-          >
-            Cart{count > 0 ? ` (${count})` : ""}
-          </Link>
-          <button
-            aria-label="Menu"
-            aria-expanded={open}
-            onClick={() => setOpen(!open)}
-            className="shopnav-burger"
-            style={{
-              display: "none", background: "none", border: "none",
-              color: "var(--ivory)", fontSize: "1.2rem", cursor: "pointer",
-            }}
-          >
-            ☰
-          </button>
         </div>
       </nav>
-      {open && (
-        <div style={{ borderTop: "1px solid var(--light-line)", padding: "1rem 4vw 1.5rem", display: "grid", gap: ".9rem" }}>
-          {[...links, { href: "https://comcofgroup.com", label: "Comcof Group" }].map((l) => (
-            <Link key={l.href} href={l.href} onClick={() => setOpen(false)}
-              style={{ fontSize: ".85rem", letterSpacing: ".08em", textTransform: "uppercase", color: "var(--ivory)", textDecoration: "none" }}>
-              {l.label}
-            </Link>
-          ))}
-        </div>
-      )}
-      <style jsx>{`
-        @media (max-width: 900px) {
-          :global(.shopnav-links) { display: none !important; }
-          .shopnav-burger { display: block !important; }
-        }
-      `}</style>
     </header>
   );
 }
 
 export function ShopFooter() {
   return (
-    <footer style={{ borderTop: "1px solid var(--light-line)", padding: "3.5rem 4vw", marginTop: "4rem" }}>
-      <div style={{ maxWidth: "var(--w-page)", margin: "0 auto", display: "flex", flexWrap: "wrap", gap: "2.5rem", justifyContent: "space-between", alignItems: "center" }}>
-        <div>
-          <Logo height={30} />
-          <p style={{ fontSize: ".78rem", color: "var(--warm-gray)", marginTop: ".9rem", maxWidth: 320, lineHeight: 1.7 }}>
-            Comcof Shop is the consumer channel of Comcof Group, a coffee
-            enterprise being built from Ugandan origins.
-          </p>
-        </div>
-        <nav aria-label="Footer" style={{ display: "flex", gap: "1.6rem", flexWrap: "wrap", fontSize: ".78rem" }}>
-          <a href="https://comcofgroup.com" style={{ color: "var(--warm-gray)", textDecoration: "none" }}>Comcof Group</a>
-          <a href="https://comcofgroup.com/coffee" style={{ color: "var(--warm-gray)", textDecoration: "none" }}>Our Coffee</a>
-          <a href="https://comcofgroup.com/privacy" style={{ color: "var(--warm-gray)", textDecoration: "none" }}>Privacy</a>
-          <a href="https://comcofgroup.com/terms" style={{ color: "var(--warm-gray)", textDecoration: "none" }}>Terms</a>
-          <a href="mailto:info@comcofgroup.com" style={{ color: "var(--warm-gray)", textDecoration: "none" }}>Support</a>
+    <footer style={{ borderTop: "1px solid rgba(247,243,236,.08)", padding: "4rem 4vw 3rem" }}>
+      <div
+        style={{
+          maxWidth: "var(--w-page)",
+          margin: "0 auto",
+          display: "flex",
+          flexWrap: "wrap",
+          gap: "2.5rem",
+          justifyContent: "space-between",
+          alignItems: "flex-end",
+        }}
+      >
+        <Logo height={26} />
+        <nav aria-label="Footer" style={{ display: "flex", gap: "1.8rem", flexWrap: "wrap" }}>
+          <a href="https://comcofgroup.com" style={linkStyle}>Comcof Group</a>
+          <a href="https://comcofgroup.com/privacy" style={linkStyle}>Privacy</a>
+          <a href="https://comcofgroup.com/terms" style={linkStyle}>Terms</a>
+          <a href="mailto:info@comcofgroup.com" style={linkStyle}>Contact</a>
         </nav>
       </div>
-      <p style={{ maxWidth: "var(--w-page)", margin: "2.5rem auto 0", fontSize: ".7rem", color: "var(--mid-gray)" }}>
-        © 2026 Comcof Group. All rights reserved. Kampala, Uganda.
+      <p style={{ maxWidth: "var(--w-page)", margin: "3rem auto 0", fontSize: ".68rem", color: "rgba(247,243,236,.25)" }}>
+        © 2026 Comcof Group. Kampala, Uganda.
       </p>
     </footer>
   );

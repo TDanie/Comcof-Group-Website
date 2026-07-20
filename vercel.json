@@ -8,6 +8,7 @@
     { "source": "/account/:path*", "destination": "https://comcof-shop.vercel.app/account/:path*" },
     { "source": "/admin", "destination": "https://comcof-shop.vercel.app/admin" },
     { "source": "/admin/:path*", "destination": "https://comcof-shop.vercel.app/admin/:path*" },
-    { "source": "/_next/:path*", "destination": "https://comcof-shop.vercel.app/_next/:path*" }
+    { "source": "/_next/:path*", "destination": "https://comcof-shop.vercel.app/_next/:path*" },
+    { "source": "/packaging/:path*", "destination": "https://comcof-shop.vercel.app/packaging/:path*" }
   ]
 }
