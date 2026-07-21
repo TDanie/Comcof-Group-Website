@@ -1,0 +1,35 @@
+{
+  "expo": {
+    "name": "COMCOF Shop",
+    "slug": "comcof-shop",
+    "version": "0.1.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "scheme": "comcof",
+    "userInterfaceStyle": "dark",
+    "backgroundColor": "#0C0B0A",
+    "splash": {
+      "image": "./assets/splash-icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#0C0B0A"
+    },
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "com.comcofgroup.shop"
+    },
+    "android": {
+      "package": "com.comcofgroup.shop",
+      "adaptiveIcon": {
+        "backgroundColor": "#0C0B0A",
+        "foregroundImage": "./assets/adaptive-icon.png"
+      },
+      "predictiveBackGestureEnabled": false
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      "expo-font"
+    ]
+  }
+}
