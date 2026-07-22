@@ -1,6 +1,5 @@
 import { useState } from "react";
 import {
-  Image,
   Linking,
   Pressable,
   ScrollView,
@@ -20,17 +19,22 @@ import {
   DMSans_700Bold,
 } from "@expo-google-fonts/dm-sans";
 import { colors, fonts } from "./theme";
-import { SHOP_EMAIL, weights, grinds, no1, comingNext } from "./content";
+import {
+  SHOP_EMAIL,
+  hero,
+  categories,
+  releases,
+  deliveryRates,
+  freeDeliveryOver,
+  type Release,
+} from "./content";
 
-type Screen = "home" | "product";
-
-function Wordmark({ height = 26 }: { height?: number }) {
-  // Wordmark lockup rendered in type; the drawn logo lives in the packaging render.
+function Wordmark({ size = 17 }: { size?: number }) {
   return (
     <Text
       style={{
         fontFamily: fonts.sansBold,
-        fontSize: height * 0.62,
+        fontSize: size,
         letterSpacing: 2,
         color: colors.ivory,
       }}
@@ -41,66 +45,140 @@ function Wordmark({ height = 26 }: { height?: number }) {
   );
 }
 
-function Label({ children }: { children: string }) {
-  return <Text style={styles.label}>{children}</Text>;
-}
-
-function Pill({
-  text,
-  active,
-  onPress,
-}: {
-  text: string;
-  active: boolean;
-  onPress: () => void;
-}) {
+function Eyebrow({ children }: { children: string }) {
   return (
-    <Pressable
-      onPress={onPress}
-      accessibilityRole="button"
-      accessibilityState={{ selected: active }}
-      style={[styles.pill, active && styles.pillActive]}
-    >
-      <Text style={[styles.pillText, active && styles.pillTextActive]}>{text}</Text>
-    </Pressable>
+    <View style={styles.eyebrowRow}>
+      <View style={styles.eyebrowDot} />
+      <Text style={styles.eyebrowText}>{children}</Text>
+    </View>
   );
 }
 
-function HomeScreen({ onDiscover }: { onDiscover: () => void }) {
+function mailTo(subject: string) {
+  Linking.openURL(
+    `mailto:${SHOP_EMAIL}?subject=${encodeURIComponent(subject)}`
+  ).catch(() => {
+    /* No mail client; the address is shown on screen. */
+  });
+}
+
+function HomeScreen({ onOpen }: { onOpen: (r: Release) => void }) {
   return (
-    <ScrollView style={styles.screen} contentContainerStyle={{ paddingBottom: 64 }}>
+    <ScrollView style={styles.screen} contentContainerStyle={{ paddingBottom: 56 }}>
+      {/* Hero */}
       <View style={styles.hero}>
-        <Text style={styles.heroTitle}>COMCOF Shop</Text>
-        <Text style={styles.heroSub}>
-          Coffee from Ugandan origins.{"\n"}Prepared with care.{"\n"}Delivered
-          directly to your door.
+        <Eyebrow>COMCOF SHOP</Eyebrow>
+        <Text style={styles.heroTitle}>
+          {hero.title}
+          {"\n"}
+          <Text style={styles.heroTitleEm}>{hero.titleEm}</Text>
         </Text>
-        <Pressable onPress={onDiscover} style={styles.btnPrimary} accessibilityRole="button">
-          <Text style={styles.btnPrimaryText}>SHOP NO. 1</Text>
+        <Text style={styles.heroBody}>{hero.body}</Text>
+        <View style={styles.heroBtns}>
+          <Pressable
+            style={styles.btnPrimary}
+            onPress={() => onOpen(releases[0]!)}
+            accessibilityRole="button"
+          >
+            <Text style={styles.btnPrimaryText}>BROWSE COFFEE</Text>
+          </Pressable>
+          <Pressable
+            style={styles.btnGhost}
+            onPress={() => mailTo("Corporate coffee enquiry")}
+            accessibilityRole="button"
+          >
+            <Text style={styles.btnGhostText}>CORPORATE ORDERS</Text>
+          </Pressable>
+        </View>
+      </View>
+
+      {/* Shop by */}
+      <View style={styles.section}>
+        <Eyebrow>SHOP BY</Eyebrow>
+        {categories.map((c) => (
+          <View key={c.title} style={styles.card}>
+            <Text style={styles.cardTitle}>{c.title}</Text>
+            <Text style={styles.cardText}>{c.text}</Text>
+          </View>
+        ))}
+      </View>
+
+      {/* Founding releases */}
+      <View style={styles.section}>
+        <Eyebrow>FOUNDING RELEASES · COMING SOON</Eyebrow>
+        <Text style={styles.h2}>
+          The First Roast <Text style={styles.h2Em}>Is Coming</Text>
+        </Text>
+        <Text style={styles.sectionLead}>
+          Three founding releases in preparation: our signature Origin Roast,
+          Mount Elgon Arabica, and Uganda Robusta Select. Pricing and release
+          dates are announced to the launch list first.
+        </Text>
+        {releases.map((r) => (
+          <Pressable
+            key={r.slug}
+            style={styles.productCard}
+            onPress={() => onOpen(r)}
+            accessibilityRole="button"
+          >
+            <View style={styles.photoPlaceholder}>
+              <Text style={styles.photoPlaceholderText}>Photography coming</Text>
+            </View>
+            <View style={{ padding: 18 }}>
+              <Text style={styles.productOrigin}>{r.origin.toUpperCase()}</Text>
+              <Text style={styles.productName}>{r.name}</Text>
+              <Text style={styles.productShort}>{r.short}</Text>
+              <View style={styles.chipRow}>
+                {r.notes.map((n) => (
+                  <Text key={n} style={styles.chip}>
+                    {n}
+                  </Text>
+                ))}
+              </View>
+            </View>
+          </Pressable>
+        ))}
+        <Pressable
+          onPress={() => mailTo("Comcof Shop launch list")}
+          accessibilityRole="button"
+        >
+          <Text style={styles.launchLink}>
+            Want to hear about every release?{" "}
+            <Text style={{ color: colors.goldLight }}>Join the launch list.</Text>
+          </Text>
         </Pressable>
       </View>
 
-      <Pressable onPress={onDiscover} style={styles.feature} accessibilityRole="button">
-        <Image
-          source={require("./assets/no1-bag.png")}
-          style={styles.bag}
-          resizeMode="contain"
-          accessibilityLabel="COMCOF No. 1 coffee bag"
-        />
-        <Text style={styles.featureName}>{no1.name}</Text>
-        <Text style={styles.featureTag}>{no1.tagline}</Text>
-        <Text style={styles.featureLink}>DISCOVER NO. 1</Text>
-      </Pressable>
-
-      <View style={{ paddingHorizontal: 28, marginTop: 72 }}>
-        <Label>COMING NEXT</Label>
-        {comingNext.map((c) => (
-          <View key={c.name} style={styles.nextCard}>
-            <Text style={styles.nextName}>{c.name}</Text>
-            <Text style={styles.nextNote}>{c.note}</Text>
-            <Text style={styles.nextSoon}>COMING SOON</Text>
+      {/* Delivery */}
+      <View style={styles.section}>
+        <Eyebrow>DELIVERY</Eyebrow>
+        {deliveryRates.map((d) => (
+          <View key={d.zone} style={styles.deliveryRow}>
+            <Text style={styles.deliveryZone}>{d.zone.toUpperCase()}</Text>
+            <Text style={styles.deliveryFee}>{d.fee}</Text>
+            <Text style={styles.deliveryEta}>{d.estimate}</Text>
           </View>
         ))}
+        <Text style={styles.deliveryNote}>
+          Planned launch delivery rates for when ordering opens; free delivery
+          above {freeDeliveryOver}.
+        </Text>
+      </View>
+
+      {/* Business band */}
+      <View style={styles.band}>
+        <Text style={styles.bandTitle}>Buying for a Business?</Text>
+        <Text style={styles.bandText}>
+          Offices, hotels, restaurants, and events: tell us your monthly
+          requirement and we will come back with a supply plan.
+        </Text>
+        <Pressable
+          style={styles.btnPrimary}
+          onPress={() => mailTo("Corporate coffee enquiry")}
+          accessibilityRole="button"
+        >
+          <Text style={styles.btnPrimaryText}>START A CORPORATE ENQUIRY</Text>
+        </Pressable>
       </View>
 
       <Text style={styles.footer}>© 2026 Comcof Group · Kampala, Uganda</Text>
@@ -108,127 +186,64 @@ function HomeScreen({ onDiscover }: { onDiscover: () => void }) {
   );
 }
 
-function ProductScreen({ onBack }: { onBack: () => void }) {
-  const [weight, setWeight] = useState<string>(weights[0]);
-  const [grind, setGrind] = useState<string>(grinds[0]);
-  const [quantity, setQuantity] = useState(1);
-
-  const reserve = () => {
-    const body = [
-      "Reservation: COMCOF No. 1 (via mobile app)",
-      "",
-      `Size: ${weight}`,
-      `Grind: ${grind}`,
-      `Quantity: ${quantity}`,
-      "",
-      "Name:",
-      "Phone:",
-      "Delivery area:",
-      "",
-      "Please confirm pricing and delivery date.",
-    ].join("\n");
-    Linking.openURL(
-      `mailto:${SHOP_EMAIL}?subject=${encodeURIComponent("Reserve COMCOF No. 1")}&body=${encodeURIComponent(body)}`
-    ).catch(() => {
-      /* No mail client available; the address is visible in the note below. */
-    });
-  };
-
+function ProductScreen({ item, onBack }: { item: Release; onBack: () => void }) {
   return (
-    <ScrollView style={styles.screen} contentContainerStyle={{ paddingBottom: 64 }}>
-      <Pressable onPress={onBack} accessibilityRole="button" style={{ paddingHorizontal: 28, paddingTop: 18 }}>
+    <ScrollView style={styles.screen} contentContainerStyle={{ paddingBottom: 56 }}>
+      <Pressable onPress={onBack} accessibilityRole="button" style={{ padding: 24 }}>
         <Text style={styles.back}>← COMCOF SHOP</Text>
       </Pressable>
 
-      <View style={{ alignItems: "center", marginTop: 28 }}>
-        <Image
-          source={require("./assets/no1-bag.png")}
-          style={[styles.bag, { width: 260, height: 327 }]}
-          resizeMode="contain"
-          accessibilityLabel="COMCOF No. 1 coffee bag, front"
-        />
-      </View>
-
-      <View style={{ paddingHorizontal: 28, marginTop: 36 }}>
-        <Text style={styles.productName}>{no1.name}</Text>
-        <Text style={styles.productSpec}>{no1.spec.toUpperCase()}</Text>
-        <Text style={styles.productDesc}>{no1.description}</Text>
-
-        <View style={{ marginTop: 36 }}>
-          <Label>SIZE</Label>
-          <View style={styles.pillRow}>
-            {weights.map((w) => (
-              <Pill key={w} text={w} active={weight === w} onPress={() => setWeight(w)} />
-            ))}
-          </View>
+      <View style={{ paddingHorizontal: 24 }}>
+        <View style={[styles.photoPlaceholder, { height: 240 }]}>
+          <Text style={styles.photoPlaceholderText}>Photography coming</Text>
         </View>
 
-        <View style={{ marginTop: 28 }}>
-          <Label>GRIND</Label>
-          <View style={styles.pillRow}>
-            {grinds.map((g) => (
-              <Pill key={g} text={g.toUpperCase()} active={grind === g} onPress={() => setGrind(g)} />
-            ))}
-          </View>
-        </View>
-
-        <View style={{ marginTop: 28 }}>
-          <Label>QUANTITY</Label>
-          <View style={styles.qtyRow}>
-            <Pressable
-              onPress={() => setQuantity(Math.max(1, quantity - 1))}
-              style={styles.qtyBtn}
-              accessibilityRole="button"
-              accessibilityLabel="Decrease quantity"
-            >
-              <Text style={styles.qtyBtnText}>−</Text>
-            </Pressable>
-            <Text style={styles.qtyValue} accessibilityLiveRegion="polite">
-              {quantity}
-            </Text>
-            <Pressable
-              onPress={() => setQuantity(Math.min(24, quantity + 1))}
-              style={styles.qtyBtn}
-              accessibilityRole="button"
-              accessibilityLabel="Increase quantity"
-            >
-              <Text style={styles.qtyBtnText}>+</Text>
-            </Pressable>
-          </View>
-        </View>
-
-        <Text style={styles.pricingNote}>Pricing announced at release.</Text>
-
-        <Pressable onPress={reserve} style={[styles.btnPrimary, { marginTop: 18 }]} accessibilityRole="button">
-          <Text style={styles.btnPrimaryText}>RESERVE NO. 1</Text>
-        </Pressable>
-        <Text style={styles.reserveNote}>
-          Your reservation reaches us at {SHOP_EMAIL} with your selection. We
-          confirm pricing and a delivery date before anything is charged.
+        <Text style={[styles.productOrigin, { marginTop: 26 }]}>
+          {item.origin.toUpperCase()}
         </Text>
+        <Text style={styles.detailName}>{item.name}</Text>
+        <Text style={styles.detailShort}>{item.short}</Text>
 
-        <View style={styles.rule} />
-        <Label>OUR STORY</Label>
-        {no1.story.map((p, i) => (
-          <Text key={i} style={styles.story}>
-            {p}
+        <View style={styles.comingBox}>
+          <Text style={styles.comingTitle}>Coming soon</Text>
+          <Text style={styles.comingText}>
+            This release is in preparation. Join the launch list and you will be
+            the first to know when it lands.
           </Text>
-        ))}
+          <Pressable
+            style={styles.btnPrimary}
+            onPress={() => mailTo(`Launch list: ${item.name}`)}
+            accessibilityRole="button"
+          >
+            <Text style={styles.btnPrimaryText}>JOIN THE LAUNCH LIST</Text>
+          </Pressable>
+        </View>
 
-        <View style={styles.rule} />
-        {no1.details.map((d) => (
-          <View key={d.label} style={styles.detailRow}>
-            <Text style={styles.detailLabel}>{d.label.toUpperCase()}</Text>
-            <Text style={styles.detailValue}>{d.value}</Text>
-          </View>
-        ))}
+        <View style={styles.chipRow}>
+          {item.notes.map((n) => (
+            <Text key={n} style={styles.chip}>
+              {n}
+            </Text>
+          ))}
+        </View>
+
+        <View style={{ marginTop: 26 }}>
+          {item.details.map((d) => (
+            <View key={d.label} style={styles.detailRow}>
+              <Text style={styles.detailLabel}>{d.label.toUpperCase()}</Text>
+              <Text style={styles.detailValue}>{d.value}</Text>
+            </View>
+          ))}
+        </View>
+
+        <Text style={styles.fullDesc}>{item.full}</Text>
       </View>
     </ScrollView>
   );
 }
 
 export default function App() {
-  const [screen, setScreen] = useState<Screen>("home");
+  const [open, setOpen] = useState<Release | null>(null);
   const [fontsLoaded] = useFonts({
     CormorantGaramond_300Light,
     CormorantGaramond_500Medium,
@@ -241,18 +256,16 @@ export default function App() {
     <View style={{ flex: 1, backgroundColor: colors.black }}>
       <StatusBar style="light" />
       <View style={styles.nav}>
-        <Pressable onPress={() => setScreen("home")} accessibilityRole="button">
+        <Pressable onPress={() => setOpen(null)} accessibilityRole="button">
           <Wordmark />
         </Pressable>
-        <Pressable onPress={() => setScreen("product")} accessibilityRole="button">
-          <Text style={styles.navLink}>NO. 1</Text>
-        </Pressable>
+        <Text style={styles.navRight}>COMCOF GROUP</Text>
       </View>
       {fontsLoaded ? (
-        screen === "home" ? (
-          <HomeScreen onDiscover={() => setScreen("product")} />
+        open ? (
+          <ProductScreen item={open} onBack={() => setOpen(null)} />
         ) : (
-          <ProductScreen onBack={() => setScreen("home")} />
+          <HomeScreen onOpen={setOpen} />
         )
       ) : (
         <View style={{ flex: 1, backgroundColor: colors.black }} />
@@ -264,9 +277,9 @@ export default function App() {
 const styles = StyleSheet.create({
   screen: { flex: 1, backgroundColor: colors.black },
   nav: {
-    paddingTop: 58,
-    paddingBottom: 16,
-    paddingHorizontal: 28,
+    paddingTop: 54,
+    paddingBottom: 14,
+    paddingHorizontal: 24,
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
@@ -274,192 +287,281 @@ const styles = StyleSheet.create({
     borderBottomWidth: StyleSheet.hairlineWidth,
     borderBottomColor: colors.line,
   },
-  navLink: {
-    fontFamily: fonts.sansRegular,
-    fontSize: 11,
-    letterSpacing: 2.5,
-    color: colors.ivory60,
-  },
-  hero: { paddingHorizontal: 28, paddingTop: 84, paddingBottom: 24 },
-  heroTitle: {
-    fontFamily: fonts.serif,
-    fontSize: 46,
-    color: colors.ivory,
-    letterSpacing: -0.5,
-  },
-  heroSub: {
-    fontFamily: fonts.sans,
-    fontSize: 15,
-    lineHeight: 28,
-    color: colors.ivory60,
-    marginTop: 22,
-  },
-  btnPrimary: {
-    alignSelf: "flex-start",
-    backgroundColor: colors.gold,
-    paddingVertical: 15,
-    paddingHorizontal: 34,
-    marginTop: 34,
-  },
-  btnPrimaryText: {
-    fontFamily: fonts.sansBold,
-    fontSize: 11,
-    letterSpacing: 2.5,
-    color: colors.black,
-  },
-  feature: { alignItems: "center", marginTop: 72, paddingHorizontal: 28 },
-  bag: { width: 300, height: 377 },
-  featureName: {
-    fontFamily: fonts.serif,
-    fontSize: 30,
-    color: colors.ivory,
-    marginTop: 30,
-  },
-  featureTag: {
-    fontFamily: fonts.sans,
-    fontSize: 14,
-    color: colors.ivory60,
-    marginTop: 8,
-  },
-  featureLink: {
-    fontFamily: fonts.sansRegular,
-    fontSize: 10,
-    letterSpacing: 3,
-    color: colors.gold,
-    marginTop: 22,
-  },
-  label: {
+  navRight: {
     fontFamily: fonts.sansRegular,
     fontSize: 9.5,
-    letterSpacing: 3.5,
+    letterSpacing: 2,
     color: colors.ivory40,
-    marginBottom: 14,
   },
-  nextCard: {
+
+  hero: {
+    paddingHorizontal: 24,
+    paddingTop: 46,
+    paddingBottom: 44,
+    backgroundColor: colors.espresso,
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    borderBottomColor: colors.line,
+  },
+  heroTitle: {
+    fontFamily: fonts.serif,
+    fontSize: 34,
+    lineHeight: 42,
+    color: colors.ivory,
+  },
+  heroTitleEm: { color: colors.goldLight },
+  heroBody: {
+    fontFamily: fonts.sans,
+    fontSize: 14,
+    lineHeight: 25,
+    color: colors.ivory60,
+    marginTop: 18,
+  },
+  heroBtns: { flexDirection: "row", flexWrap: "wrap", gap: 10, marginTop: 28 },
+
+  eyebrowRow: { flexDirection: "row", alignItems: "center", gap: 8, marginBottom: 14 },
+  eyebrowDot: { width: 5, height: 5, borderRadius: 3, backgroundColor: colors.gold },
+  eyebrowText: {
+    fontFamily: fonts.sansRegular,
+    fontSize: 9,
+    letterSpacing: 3,
+    color: colors.gold,
+  },
+
+  section: { paddingHorizontal: 24, paddingTop: 46 },
+  h2: { fontFamily: fonts.serif, fontSize: 26, color: colors.ivory },
+  h2Em: { fontStyle: "italic", color: colors.goldLight },
+  sectionLead: {
+    fontFamily: fonts.sans,
+    fontSize: 13.5,
+    lineHeight: 24,
+    color: colors.ivory60,
+    marginTop: 12,
+    marginBottom: 20,
+  },
+
+  card: {
     borderWidth: StyleSheet.hairlineWidth,
     borderColor: colors.line,
-    padding: 22,
+    backgroundColor: colors.charcoal,
+    padding: 20,
     marginBottom: 10,
   },
-  nextName: { fontFamily: fonts.serifMedium, fontSize: 18, color: colors.ivory },
-  nextNote: {
+  cardTitle: { fontFamily: fonts.serifMedium, fontSize: 18, color: colors.ivory },
+  cardText: {
     fontFamily: fonts.sans,
     fontSize: 12.5,
     lineHeight: 20,
     color: colors.ivory40,
     marginTop: 6,
   },
-  nextSoon: {
+
+  productCard: {
+    borderWidth: StyleSheet.hairlineWidth,
+    borderColor: colors.line,
+    backgroundColor: colors.charcoal,
+    marginBottom: 14,
+  },
+  photoPlaceholder: {
+    height: 150,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: colors.espresso,
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    borderBottomColor: colors.line,
+  },
+  photoPlaceholderText: {
+    fontFamily: fonts.serif,
+    fontStyle: "italic",
+    fontSize: 14,
+    color: colors.gold,
+  },
+  productOrigin: {
     fontFamily: fonts.sansRegular,
-    fontSize: 8.5,
-    letterSpacing: 3,
-    color: colors.ivory25,
-    marginTop: 16,
+    fontSize: 9,
+    letterSpacing: 2.5,
+    color: colors.gold,
   },
-  footer: {
+  productName: {
+    fontFamily: fonts.serifMedium,
+    fontSize: 19,
+    color: colors.ivory,
+    marginTop: 6,
+  },
+  productShort: {
     fontFamily: fonts.sans,
-    fontSize: 11,
-    color: colors.ivory25,
-    textAlign: "center",
-    marginTop: 72,
+    fontSize: 12.5,
+    lineHeight: 20,
+    color: colors.ivory40,
+    marginTop: 8,
   },
+  chipRow: { flexDirection: "row", flexWrap: "wrap", gap: 6, marginTop: 14 },
+  chip: {
+    fontFamily: fonts.sansRegular,
+    fontSize: 9,
+    letterSpacing: 1.6,
+    textTransform: "uppercase",
+    color: colors.goldLight,
+    borderWidth: StyleSheet.hairlineWidth,
+    borderColor: colors.line,
+    paddingVertical: 5,
+    paddingHorizontal: 10,
+  },
+  launchLink: {
+    fontFamily: fonts.sans,
+    fontSize: 12.5,
+    color: colors.ivory40,
+    marginTop: 6,
+  },
+
+  deliveryRow: {
+    borderWidth: StyleSheet.hairlineWidth,
+    borderColor: colors.line,
+    padding: 16,
+    marginBottom: 8,
+  },
+  deliveryZone: {
+    fontFamily: fonts.sansRegular,
+    fontSize: 9,
+    letterSpacing: 2,
+    color: colors.gold,
+  },
+  deliveryFee: {
+    fontFamily: fonts.serifMedium,
+    fontSize: 17,
+    color: colors.ivory,
+    marginTop: 5,
+  },
+  deliveryEta: {
+    fontFamily: fonts.sans,
+    fontSize: 11.5,
+    color: colors.ivory40,
+    marginTop: 2,
+  },
+  deliveryNote: {
+    fontFamily: fonts.sans,
+    fontSize: 11.5,
+    lineHeight: 18,
+    color: colors.ivory40,
+    marginTop: 10,
+  },
+
+  band: {
+    backgroundColor: colors.charcoal,
+    paddingHorizontal: 24,
+    paddingVertical: 44,
+    marginTop: 52,
+    alignItems: "center",
+  },
+  bandTitle: {
+    fontFamily: fonts.serif,
+    fontSize: 25,
+    color: colors.ivory,
+    textAlign: "center",
+  },
+  bandText: {
+    fontFamily: fonts.sans,
+    fontSize: 13,
+    lineHeight: 22,
+    color: colors.ivory40,
+    textAlign: "center",
+    marginTop: 12,
+    marginBottom: 24,
+  },
+
+  btnPrimary: {
+    backgroundColor: colors.gold,
+    paddingVertical: 14,
+    paddingHorizontal: 26,
+    alignSelf: "flex-start",
+  },
+  btnPrimaryText: {
+    fontFamily: fonts.sansBold,
+    fontSize: 10,
+    letterSpacing: 2.2,
+    color: colors.black,
+  },
+  btnGhost: {
+    borderWidth: 1,
+    borderColor: "rgba(247,243,236,0.3)",
+    paddingVertical: 14,
+    paddingHorizontal: 26,
+  },
+  btnGhostText: {
+    fontFamily: fonts.sansRegular,
+    fontSize: 10,
+    letterSpacing: 2.2,
+    color: colors.ivory,
+  },
+
   back: {
     fontFamily: fonts.sansRegular,
     fontSize: 10,
     letterSpacing: 2.5,
     color: colors.ivory40,
   },
-  productName: { fontFamily: fonts.serif, fontSize: 36, color: colors.ivory },
-  productSpec: {
-    fontFamily: fonts.sansRegular,
-    fontSize: 10,
-    letterSpacing: 3,
-    color: colors.gold,
+  detailName: {
+    fontFamily: fonts.serif,
+    fontSize: 30,
+    color: colors.ivory,
+    marginTop: 8,
+  },
+  detailShort: {
+    fontFamily: fonts.sans,
+    fontSize: 14,
+    lineHeight: 24,
+    color: colors.ivory60,
     marginTop: 12,
   },
-  productDesc: {
-    fontFamily: fonts.sans,
-    fontSize: 14.5,
-    lineHeight: 25,
-    color: colors.ivory60,
-    marginTop: 16,
-  },
-  pillRow: { flexDirection: "row", flexWrap: "wrap", gap: 8 },
-  pill: {
-    borderWidth: 1,
+  comingBox: {
+    borderWidth: StyleSheet.hairlineWidth,
     borderColor: colors.line,
-    paddingVertical: 11,
-    paddingHorizontal: 18,
+    backgroundColor: colors.charcoal,
+    padding: 22,
+    marginTop: 24,
   },
-  pillActive: { borderColor: colors.gold },
-  pillText: {
-    fontFamily: fonts.sansRegular,
-    fontSize: 10.5,
-    letterSpacing: 2,
-    color: colors.ivory60,
-  },
-  pillTextActive: { color: colors.gold },
-  qtyRow: {
-    flexDirection: "row",
-    alignItems: "center",
-    alignSelf: "flex-start",
-    borderWidth: 1,
-    borderColor: colors.line,
-  },
-  qtyBtn: { paddingVertical: 10, paddingHorizontal: 18 },
-  qtyBtnText: { fontFamily: fonts.sansRegular, fontSize: 16, color: colors.ivory60 },
-  qtyValue: {
-    fontFamily: fonts.sansRegular,
-    fontSize: 14,
-    color: colors.ivory,
-    minWidth: 36,
-    textAlign: "center",
-  },
-  pricingNote: {
+  comingTitle: { fontFamily: fonts.serifMedium, fontSize: 18, color: colors.ivory },
+  comingText: {
     fontFamily: fonts.sans,
     fontSize: 12.5,
+    lineHeight: 21,
     color: colors.ivory40,
-    marginTop: 30,
-  },
-  reserveNote: {
-    fontFamily: fonts.sans,
-    fontSize: 11.5,
-    lineHeight: 18,
-    color: colors.ivory25,
-    marginTop: 14,
-  },
-  rule: {
-    height: StyleSheet.hairlineWidth,
-    backgroundColor: colors.line,
-    marginVertical: 40,
-  },
-  story: {
-    fontFamily: fonts.serif,
-    fontSize: 19,
-    lineHeight: 31,
-    color: "rgba(247,243,236,0.82)",
-    marginBottom: 18,
+    marginTop: 8,
+    marginBottom: 20,
   },
   detailRow: {
     flexDirection: "row",
     justifyContent: "space-between",
-    gap: 16,
-    paddingVertical: 16,
+    gap: 14,
+    paddingVertical: 13,
     borderBottomWidth: StyleSheet.hairlineWidth,
     borderBottomColor: colors.line,
   },
   detailLabel: {
     fontFamily: fonts.sansRegular,
-    fontSize: 9.5,
-    letterSpacing: 2.5,
+    fontSize: 9,
+    letterSpacing: 2.2,
     color: colors.ivory40,
-    paddingTop: 4,
+    paddingTop: 3,
   },
   detailValue: {
-    fontFamily: fonts.serifMedium,
-    fontSize: 16,
-    color: "rgba(247,243,236,0.85)",
+    fontFamily: fonts.sans,
+    fontSize: 13,
+    color: colors.ivory,
     flexShrink: 1,
     textAlign: "right",
+  },
+  fullDesc: {
+    fontFamily: fonts.sans,
+    fontSize: 13,
+    lineHeight: 24,
+    color: colors.ivory60,
+    marginTop: 24,
+  },
+  footer: {
+    fontFamily: fonts.sans,
+    fontSize: 11,
+    color: colors.ivory25,
+    textAlign: "center",
+    marginTop: 44,
   },
 });

@@ -1,9 +1,10 @@
 # COMCOF Shop Mobile App
 
-Expo SDK 54 + TypeScript app in `mobile-app/`. The SDK is pinned to match the Expo Go build published in the app stores; if a future `npx expo start` reports "Project is incompatible with this version of Expo Go", the project SDK is ahead of the store app and must be moved back (see Troubleshooting). Version 0.1: the No. 1 launch
-experience (home, product with size/grind/quantity selectors, reservation
-by email, Coming Next), in the full brand system with Cormorant Garamond
-and DM Sans loaded on device.
+Expo SDK 54 + TypeScript app in `mobile-app/`. The SDK is pinned to match the Expo Go build published in the app stores; if a future `npx expo start` reports "Project is incompatible with this version of Expo Go", the project SDK is ahead of the store app and must be moved back (see Troubleshooting). Version 0.2 mirrors the web shop: hero, four category cards, the three
+founding releases as Coming Soon placeholders with tasting notes and
+detail pages, planned delivery rates, and a corporate band. Nothing is
+priced or orderable; interest goes to the launch list by email. Brand
+system throughout, with Cormorant Garamond and DM Sans loaded on device.
 
 ## Test on your phone today (free, no store accounts)
 
