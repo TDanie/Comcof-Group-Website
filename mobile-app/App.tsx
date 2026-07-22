@@ -26,6 +26,7 @@ import {
   releases,
   deliveryRates,
   freeDeliveryOver,
+  whatFollows,
   type Release,
 } from "./content";
 
@@ -110,9 +111,11 @@ function HomeScreen({ onOpen }: { onOpen: (r: Release) => void }) {
           The First Roast <Text style={styles.h2Em}>Is Coming</Text>
         </Text>
         <Text style={styles.sectionLead}>
-          Three founding releases in preparation: our signature Origin Roast,
-          Mount Elgon Arabica, and Uganda Robusta Select. Pricing and release
-          dates are announced to the launch list first.
+          Five founding releases in preparation. Comcof No. 1 leads the launch,
+          Rwenzori Reserve is our premium origin flagship, Signature Espresso
+          the specialised preparation, Nile Gold establishes our Robusta
+          identity, and Bugisu Heritage represents traceable origin. Pricing
+          and release dates are announced to the launch list first.
         </Text>
         {releases.map((r) => (
           <Pressable
@@ -147,6 +150,7 @@ function HomeScreen({ onOpen }: { onOpen: (r: Release) => void }) {
             <Text style={{ color: colors.goldLight }}>Join the launch list.</Text>
           </Text>
         </Pressable>
+        <Text style={styles.whatFollows}>{whatFollows}</Text>
       </View>
 
       {/* Delivery */}
@@ -405,6 +409,13 @@ const styles = StyleSheet.create({
     borderColor: colors.line,
     paddingVertical: 5,
     paddingHorizontal: 10,
+  },
+  whatFollows: {
+    fontFamily: fonts.sans,
+    fontSize: 11.5,
+    lineHeight: 19,
+    color: colors.ivory25,
+    marginTop: 12,
   },
   launchLink: {
     fontFamily: fonts.sans,

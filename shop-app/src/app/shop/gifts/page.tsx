@@ -20,9 +20,10 @@ export default async function GiftsPage() {
           Coffee Worth <em>Giving</em>
         </h1>
         <p className="lead">
-          Gift boxes and hampers built around coffee we would proudly drink
-          ourselves, with a written message from you and delivery arranged to
-          the recipient.
+          The Comcof Signature Gift Box and the Discovery Set, smaller packs
+          across several coffees, are built around coffee we would proudly
+          drink ourselves, with a written message from you and delivery
+          arranged to the recipient.
         </p>
         {products.length > 0 ? (
           <div style={{ marginTop: "2rem" }}>

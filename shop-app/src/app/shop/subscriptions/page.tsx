@@ -21,8 +21,9 @@ export default function SubscriptionsPage() {
           Never Run Out of <em>Good Coffee</em>
         </h1>
         <p className="lead">
-          Choose a coffee, a grind, and a rhythm; we handle the rest. Pause,
-          skip, or change your coffee whenever you like.
+          Comcof Monthly Reserve brings the range to your door on a rhythm that
+          suits you. Choose a coffee, a grind, and a frequency; we handle the
+          rest. Pause, skip, or change your coffee whenever you like.
         </p>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: "1.2rem", marginTop: "2.4rem" }}>
           {plans.map((p) => (

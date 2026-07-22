@@ -1,9 +1,10 @@
 /**
  * Comcof Shop content, mirrored from the web shop
- * (shop-app/src/lib/founding.ts). Nothing here is priced or orderable:
- * the founding releases are a coming-soon showcase, and interest is
- * captured through the launch list. When the Supabase backend goes live,
- * this file is replaced by the shared API.
+ * (shop-app/src/lib/founding.ts): the five founding label families in
+ * launch order. Nothing here is priced or orderable; the releases are a
+ * coming-soon showcase and interest is captured through the launch list.
+ * When the Supabase backend goes live, this file is replaced by the
+ * shared API.
  */
 export const SHOP_EMAIL = "info@comcofgroup.com";
 
@@ -21,11 +22,11 @@ export const categories = [
   },
   {
     title: "Gifts & Hampers",
-    text: "Coffee worth giving: boxes and hampers built around genuinely good lots.",
+    text: "The Signature Gift Box and the Discovery Set, built around coffee worth giving.",
   },
   {
     title: "Subscriptions",
-    text: "Fresh coffee on your schedule: weekly, fortnightly, or monthly.",
+    text: "Monthly Reserve: fresh coffee on your schedule, weekly, fortnightly, or monthly.",
   },
   {
     title: "Corporate",
@@ -45,54 +46,89 @@ export type Release = {
 
 export const releases: Release[] = [
   {
-    slug: "comcof-origin-roast",
-    name: "Comcof Origin Roast",
+    slug: "comcof-no-1",
+    name: "Comcof No. 1",
     origin: "Uganda",
     short:
-      "Our signature blend of Ugandan Robusta and Arabica, roasted medium-dark for a bold, balanced daily cup. Coming soon: our first announced release.",
+      "Everyday coffee. Balanced, dependable, and made for daily drinking. Coming soon: the release that leads our launch.",
     full:
-      "The coffee we built the company to make: Uganda Robusta for body and strength, Mount Elgon Arabica for sweetness and aroma, roasted medium-dark and packed fresh. Balanced, consistent, repeatable, at home in an espresso machine, a moka pot, or a french press. This is a founding release, in preparation now. Join the launch list and you will be the first to know when it is ready.",
-    notes: ["Dark chocolate", "Toasted nut", "Brown sugar"],
+      "Our accessible flagship, built for the cup you make every morning: balanced, forgiving, and consistent from bag to bag. Ugandan coffee roasted medium, offered whole bean or ground in a 250g pack. This is the release that leads our launch. Join the launch list and you will be the first to know when it is ready.",
+    notes: ["Chocolate", "Caramel", "Roasted nuts"],
     details: [
       { label: "Origin", value: "Uganda" },
-      { label: "Roast", value: "Medium-Dark" },
-      { label: "Brewing", value: "Espresso, moka pot, french press" },
+      { label: "Roast", value: "Medium" },
+      { label: "Pack", value: "250g, whole bean or ground" },
+      { label: "Brewing", value: "Filter, french press, moka pot" },
     ],
   },
   {
-    slug: "uganda-arabica-mount-elgon",
-    name: "Uganda Arabica, Mount Elgon",
+    slug: "rwenzori-reserve",
+    name: "Comcof Rwenzori Reserve",
+    origin: "Uganda · Rwenzori Mountains",
+    short:
+      "Our premium origin flagship: Arabica from the Rwenzori Mountains, naturally processed. Coming soon.",
+    full:
+      "Arabica grown high in the Rwenzori Mountains and processed naturally, which gives it a depth and fruit that a washed coffee will not. Roasted medium to protect its character, offered whole bean or ground in a premium 250g pack, with a 1kg format planned. This is our premium flagship, in preparation now.",
+    notes: ["Dark chocolate", "Berries", "Floral"],
+    details: [
+      { label: "Region", value: "Rwenzori Mountains" },
+      { label: "Process", value: "Natural" },
+      { label: "Roast", value: "Medium" },
+      { label: "Brewing", value: "Pour-over, filter, AeroPress" },
+    ],
+  },
+  {
+    slug: "signature-espresso",
+    name: "Comcof Signature Espresso",
     origin: "Uganda · Mount Elgon",
     short:
-      "Specialty-grade Arabica from the slopes of Mount Elgon, roasted medium. Bright, sweet, and clean. Coming soon: a limited first release.",
+      "Developed for espresso: Mount Elgon coffee roasted for crema, body, and sweetness under pressure. Coming soon.",
     full:
-      "Grown on the volcanic slopes of Mount Elgon in Bugisu country, this is the Arabica that made Ugandan coffee's name. Roasted medium to keep its brightness: expect florals, red fruit, and a chocolate finish. The first release will be a limited lot. Join the launch list to hear when it lands.",
-    notes: ["Florals", "Red fruit", "Chocolate finish"],
+      "A coffee developed specifically for espresso preparation, drawn from Mount Elgon in eastern Uganda. Roasted medium-dark for body, crema, and sweetness under pressure, as a washed coffee or an Arabica-led blend. Offered whole bean or ground for espresso. In preparation now.",
+    notes: ["Dark chocolate", "Caramel", "Roasted almonds"],
     details: [
-      { label: "Origin", value: "Uganda" },
       { label: "Region", value: "Mount Elgon" },
-      { label: "Altitude", value: "1,600 to 1,900 m" },
       { label: "Process", value: "Washed" },
-      { label: "Roast", value: "Medium" },
+      { label: "Roast", value: "Medium-Dark" },
+      { label: "Brewing", value: "Espresso, moka pot" },
     ],
   },
   {
-    slug: "uganda-robusta-select",
-    name: "Uganda Robusta Select",
-    origin: "Uganda",
+    slug: "nile-gold",
+    name: "Comcof Nile Gold",
+    origin: "Uganda · Premium Robusta",
     short:
-      "The pride of Ugandan coffee: screen-selected Robusta roasted dark. Strong, honest, and full-bodied. Coming soon.",
+      "Premium Robusta. Uganda is the birthplace of Robusta, and this is ours: strong, rich, and unapologetic. Coming soon.",
     full:
-      "Uganda grows some of the finest Robusta on earth, and this is ours: screen-selected, clean-prepared, and roasted dark for strength with no harshness. The backbone of a serious espresso and the honest cup Uganda has always known. In preparation now; join the launch list to hear when it lands.",
-    notes: ["Bold body", "Cocoa", "Earthy sweetness"],
+      "Premium Ugandan Robusta, naturally processed and roasted medium-dark for a heavy body and a thick, lasting crema. Robusta is not a lesser coffee, it is Uganda's own, and this release is how we say so. Built for espresso, the moka pot, and milk-based coffee. In preparation now.",
+    notes: ["Chocolate", "Nuts", "Earthy sweetness"],
     details: [
       { label: "Origin", value: "Uganda" },
       { label: "Process", value: "Natural" },
-      { label: "Roast", value: "Dark" },
-      { label: "Brewing", value: "Espresso, moka pot, cold brew" },
+      { label: "Roast", value: "Medium-Dark" },
+      { label: "Brewing", value: "Espresso, moka pot, milk-based" },
+    ],
+  },
+  {
+    slug: "bugisu-heritage",
+    name: "Comcof Bugisu Heritage",
+    origin: "Uganda · Bugisu, Mount Elgon",
+    short:
+      "Traceable Bugisu Arabica, roasted lighter and released in limited lots. Coming soon.",
+    full:
+      "Arabica from Bugisu on the slopes of Mount Elgon, roasted light to medium so its delicacy survives the roast. Semi-washed and washed lots, expressive and clean, released in limited numbers for drinkers who follow origin and traceability. In preparation now.",
+    notes: ["Delicate", "Bright", "Clean finish"],
+    details: [
+      { label: "Region", value: "Bugisu, Mount Elgon" },
+      { label: "Process", value: "Semi-washed" },
+      { label: "Roast", value: "Light-Medium" },
+      { label: "Brewing", value: "Pour-over, filter" },
     ],
   },
 ];
+
+export const whatFollows =
+  "Kampala House Blend, our versatile house coffee for homes, offices, and hospitality, follows the founding five, alongside the Comcof Discovery Set, the Signature Gift Box, Monthly Reserve subscriptions, and our Origin and Reserve Collections.";
 
 export const deliveryRates = [
   { zone: "Kampala Central", fee: "UGX 7,000", estimate: "Same or next day" },

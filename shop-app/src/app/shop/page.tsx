@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { getActiveProducts } from "@/lib/catalog";
 import { ProductGrid } from "@/components/ProductGrid";
 import { contact } from "@/lib/env";
-import { deliveryRates, freeDeliveryOver } from "@/lib/founding";
+import { deliveryRates, freeDeliveryOver, whatFollows } from "@/lib/founding";
 
 export const metadata: Metadata = {
   title: "Comcof Shop",
@@ -109,9 +109,11 @@ export default async function ShopHome() {
             The First Roast <em>Is Coming</em>
           </h2>
           <p className="lead">
-            Three founding releases in preparation: our signature Origin
-            Roast, Mount Elgon Arabica, and Uganda Robusta Select. Pricing and
-            release dates are announced to the launch list first.
+            Five founding releases in preparation. Comcof No. 1 leads the
+            launch, Rwenzori Reserve is our premium origin flagship, Signature
+            Espresso the specialised preparation, Nile Gold establishes our
+            Robusta identity, and Bugisu Heritage represents traceable origin.
+            Pricing and release dates are announced to the launch list first.
           </p>
           <div style={{ marginTop: "1.5rem" }}>
             <ProductGrid products={products.slice(0, 6)} />
@@ -122,6 +124,9 @@ export default async function ShopHome() {
               Join the launch list
             </a>
             .
+          </p>
+          <p style={{ marginTop: ".8rem", fontSize: ".78rem", lineHeight: 1.7, color: "var(--mid-gray)", maxWidth: 620 }}>
+            {whatFollows}
           </p>
         </div>
       </section>
